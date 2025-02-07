@@ -16,7 +16,7 @@ function DigitalClock() {
 
   return (
     <div>
-      <h1>{formattedTime}</h1>
+      <h1 className="text-white text-5xl font-bold">{formattedTime}</h1>
     </div>
   );
 }
