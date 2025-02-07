@@ -2,11 +2,12 @@ import Image from "next/image";
 import DigitalClock from "./clock";
 import NavHeader from "./header";
 
-export default function Home() {
+function BasePage() {
   return (
     <div>
-      <NavHeader/>
+      <NavHeader></NavHeader>
       
     </div>
   );
 }
+export default BasePage;
