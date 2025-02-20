@@ -3,6 +3,9 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation"; // Import useRouter to handle navigation
 import { signIn } from "../../../../auth"; // Import the signIn function
+import NavHeader from "@/app/header";
+
+<NavHeader/>
 
 export default function SignIn() {
   const [email, setEmail] = useState<string>("");
@@ -21,25 +24,30 @@ export default function SignIn() {
   };
 
   return (
-    <div className="flex flex-col items-center">
-      <h2 className="text-xl">Sign In</h2>
-      <form onSubmit={handleSignIn} className="flex flex-col gap-2">
-        <input 
-          type="email" 
-          placeholder="Email" 
-          value={email} 
-          onChange={(e) => setEmail(e.target.value)} 
-          className="border p-2"
-        />
-        <input 
-          type="password" 
-          placeholder="Password" 
-          value={password} 
-          onChange={(e) => setPassword(e.target.value)} 
-          className="border p-2"
-        />
-        <button className="bg-green-500 text-white px-4 py-2 rounded">Sign In</button>
-      </form>
+    <div className="bg-sky-700 min-h-screen w-full">
+      <NavHeader/>
+      <div className="flex flex-1 justify-center items-center">
+        <h1 className="text-white text-7xl font-bold p-14">Sign In</h1>
+      </div>
+      <div className="pb-10 flex flex-1 justify-center items-center"> 
+        <form onSubmit={handleSignIn} className="flex flex-col gap-2">
+          <input 
+            type="email" 
+            placeholder="Email" 
+            value={email} 
+            onChange={(e) => setEmail(e.target.value)} 
+            className="border p-2"
+          />
+          <input 
+            type="password" 
+            placeholder="Password" 
+            value={password} 
+            onChange={(e) => setPassword(e.target.value)} 
+            className="border p-2"
+          />
+          <button className="bg-green-500 text-white px-4 py-2 rounded">Sign In</button>
+        </form>
+        </div>
     </div>
   );
 }

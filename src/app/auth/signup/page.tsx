@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { signUp } from "../../../../auth";
+import NavHeader from "@/app/header";
 
 export default function SignUp() {
   const [email, setEmail] = useState<string>("");
@@ -18,8 +19,12 @@ export default function SignUp() {
   };
 
   return (
-    <div className="flex flex-col items-center">
-      <h2 className="text-xl">Sign Up</h2>
+    <div className="bg-sky-700 min-h-screen w-full">
+      <NavHeader/>
+      <div className="flex flex-1 justify-center items-center">
+        <h1 className="text-white text-7xl font-bold p-14">Sign Up</h1>
+      </div>
+      <div className="pb-10 flex flex-1 justify-center items-center">
       <form onSubmit={handleSignUp} className="flex flex-col gap-2">
         <input 
           type="email" 
@@ -37,6 +42,7 @@ export default function SignUp() {
         />
         <button className="bg-blue-500 text-white px-4 py-2 rounded">Sign Up</button>
       </form>
+      </div>
     </div>
   );
 }
