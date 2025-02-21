@@ -14,20 +14,15 @@ export default function Welcome() {
       <div className="flex flex-col items-center justify-center">
         <div className="pb-[4vw] flex flex-1 justify-center items-center gap-[5vw] w-6/12"> 
           <button className="border-none text-[4.0vw] w-1/2 h-[11vw] outline-none bg-white text-black font-semibold rounded-lg">
-            Login
+            Tap Card
           </button>
           <button className="border-none text-[4.0vw] w-1/2 h-[11vw] outline-none bg-white text-black font-semibold rounded-lg">
-            Register
+            Scan Face
           </button>
         </div>
         <div className="pb-[4vw] flex flex-1 justify-center items-center gap-[5vw] w-6/12"> 
           <button className="border-none text-[5vw] w-full h-[11vw] outline-none bg-white text-black font-semibold rounded-lg">
-            Route Information
-          </button>
-        </div>
-        <div className="pb-[4vw] flex flex-1 justify-center items-center gap-[5vw] w-6/12"> 
-          <button className="border-none text-[5vw] w-full h-[11vw] outline-none bg-white text-black font-semibold rounded-lg">
-            Get Support
+            Register your face
           </button>
         </div>
         <div className="pt-[4vw] flex flex-1 justify-center items-center gap-[5vw] w-6/12"> 
@@ -36,9 +31,6 @@ export default function Welcome() {
           </button>
           <button className="border-none text-[3vw] w-full h-[6vw] outline-none bg-white text-black font-semibold rounded-lg">
             Exit
-          </button>
-          <button className="border-none text-[3vw] w-full h-[6vw] outline-none bg-white text-black font-semibold rounded-lg">
-            Agree
           </button>
         </div>
       </div>

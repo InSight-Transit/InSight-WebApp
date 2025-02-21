@@ -1,7 +1,7 @@
 import NavHeader from "../header";
 
 
-export default function Welcome() {
+export default function Home() {
   return (
     <div className="bg-sky-700 min-h-screen w-full">
       <NavHeader/>
