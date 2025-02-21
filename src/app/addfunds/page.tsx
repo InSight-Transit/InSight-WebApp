@@ -22,10 +22,10 @@ export default function Home() {
         </div>
         <div className="pb-[4vw] flex flex-1 justify-center items-center gap-[5vw] w-6/12"> 
           <button className="border-none text-[4.0vw] w-1/2 h-[11vw] outline-none bg-white text-black font-semibold rounded-lg">
-            $10
+            $20
           </button>
           <button className="border-none text-[4.0vw] w-1/2 h-[11vw] outline-none bg-white text-black font-semibold rounded-lg">
-            $10
+            $50
           </button>
         </div>
         <div className="pb-[4vw] flex flex-1 justify-center items-center gap-[5vw] w-6/12"> 
