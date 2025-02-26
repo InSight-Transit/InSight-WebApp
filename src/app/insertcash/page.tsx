@@ -1,5 +1,5 @@
 import NavHeader from "../header";
-import Payfareicon from "../../public/Payfareicon.png";
+import Payfareicon from "../../public/insertcashicon.png";
 
 
 export default function Welcome() {
@@ -15,10 +15,10 @@ export default function Welcome() {
 
       <div className="flex flex-col items-center justify-center flex-grow">
         <h1 className="text-white text-5xl font-bold mb-6">InSight</h1>
-        <h2 className="text-white text-xl font-semibold mb-8">Please tap your bus card</h2>
+        <h2 className="text-white text-xl font-semibold mb-8">Please insert the cash / coins</h2>
         <div className="flex flex-col items-center">
           <div className="bg-sky-700 p-6 rounded-lg">
-          <img src="./Payfareicon.png" alt="Tap Card Icon" className="w-43 h-43" />
+          <img src="./insertcashicon.png" alt="Insert Cash Icon" className="w-43 h-43" />
           </div>
         </div>
 
