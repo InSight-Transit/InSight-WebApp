@@ -24,7 +24,7 @@ export default function registration() {
         </div>
         <div className="pb-[4vw] flex flex-1 justify-center items-center gap-[3vw] w-10/12"> 
           <div className="w-6/12"> 
-            <h3 className="text-white text-[2vw] pb-[0.2vw]">Phone Number</h3>
+            <h3 className="text-white text-[2vw] pb-[0.2vw]">E-mail</h3>
             <input className="border-none text-[4.0vw] w-11/12 h-[11vw] outline-none bg-white text-black font-semibold rounded-lg"></input>
           </div>
           <div className="w-6/12"> 
