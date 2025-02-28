@@ -2,11 +2,13 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation"; // Import useRouter to handle navigation
-import { signIn } from "../../../../auth"; // Import the signIn function
+import { signIn } from "../../../auth"; // Import the signIn function
 import NavHeader from "@/app/header";
 
 <NavHeader/>
 
+// Sign in kept from Arjay branch w/ Signup/Register; probably not to be used
+// Feel free to delete or change
 export default function SignIn() {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
