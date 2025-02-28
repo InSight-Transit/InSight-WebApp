@@ -16,26 +16,27 @@ onAuthStateChanged(auth, (user) => {
 
 // Sign-up function
 export const signUp = async (email, password, userData) => {
-    try {
-      // Create the user with Firebase Authentication
-      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-      
-      // Get the user object
-      const user = userCredential.user;
-  
-      // Create a user document in Firestore under the 'users' collection
-      await setDoc(doc(collection(db, "users"), user.uid), {
-        email: user.email,
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      });
-  
-      console.log("User added to Firestore with UID: ", user.uid);
-      return user; // Return the created user
-    } catch (error) {
-      console.error("Error signing up:", error);
-    }
-  };
+  try {
+    // Create user in Firebase Authentication
+    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+    const user = userCredential.user;
+
+    // Store user details in Firestore
+    await setDoc(doc(db, "users", user.uid), {
+      firstName: userData.firstName,
+      lastName: userData.lastName,
+      phone: userData.phone,
+      email: user.email,
+      createdAt: new Date(),
+    });
+
+    console.log("User registered successfully:", user);
+    return user;
+  } catch (error) {
+    console.error("Error signing up:", error);
+    return null;
+  }
+};
 
 // Sign In function
 export const signIn = async (email, password) => {
