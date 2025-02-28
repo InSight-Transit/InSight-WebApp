@@ -1,4 +1,4 @@
-import NavHeader from "../header";
+import NavHeader from "/src/app/header";
 
 
 export default function Home() {

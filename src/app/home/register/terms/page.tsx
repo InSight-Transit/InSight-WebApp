@@ -1,5 +1,5 @@
 
-import NavHeader from "../../header";
+import NavHeader from "../../../header";
 
 export default function registration() {
   return (
