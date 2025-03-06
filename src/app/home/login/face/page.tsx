@@ -1,6 +1,4 @@
-import NavHeader from "../header";
-import Payfareicon from "../../public/Payfareicon.png";
-
+import NavHeader from "../../../header";
 
 export default function Welcome() {
   return (
@@ -12,16 +10,12 @@ export default function Welcome() {
       <div className="flex flex-1 justify-center items-center">
         <h2 className="text-white text-[3vw] font-bold pb-[4vw]">Choose an option</h2>
       </div>
-
       <div className="flex flex-col items-center justify-center flex-grow">
-        <h1 className="text-white text-5xl font-bold mb-6">InSight</h1>
-        <h2 className="text-white text-xl font-semibold mb-8">Please tap your bus card</h2>
         <div className="flex flex-col items-center">
-          <div className="bg-sky-700 p-6 rounded-lg">
-          <img src="./Payfareicon.png" alt="Tap Card Icon" className="w-43 h-43" />
+         <div className="bg-sky-700 p-6 rounded-lg">
+          <img src="../../scanfaceicon.png" alt="Scan Face Icon" className="w-43 h-43" />
           </div>
         </div>
-
         <div className="pt-[4vw] flex flex-1 justify-center items-center gap-[5vw] w-6/12"> 
           <button className="border-none text-[3vw] w-full h-[6vw] outline-none bg-white text-black font-semibold rounded-lg">
             Back

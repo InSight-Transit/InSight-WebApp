@@ -1,5 +1,6 @@
 
 import NavHeader from "./header";
+import Link from 'next/link';
 
 export default function Home() {
   return (
@@ -13,9 +14,11 @@ export default function Home() {
       </div>
       <div className="flex flex-col items-center justify-center">
         <div className="pb-[4vw] flex flex-1 justify-center items-center gap-[5vw] w-6/12"> 
-          <button className="border-none text-[4.0vw] w-1/2 h-[11vw] outline-none bg-white text-black font-semibold rounded-lg">
-            English
-          </button>
+            <Link href={`/home/`} className="w-1/2 h-[11vw]">
+              <button className="border-none text-[4.0vw] w-full h-full outline-none bg-white text-black font-semibold rounded-lg">
+                English
+              </button>
+            </Link>
           <button className="border-none text-[4.0vw] w-1/2 h-[11vw] outline-none bg-white text-black font-semibold rounded-lg">
             Español
           </button>
