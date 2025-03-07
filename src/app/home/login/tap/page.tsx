@@ -1,4 +1,5 @@
 import NavHeader from "../../../header";
+import Link from "next/link";
 
 export default function Welcome() {
   return (
@@ -15,17 +16,25 @@ export default function Welcome() {
         <h2 className="text-white text-xl font-semibold mb-8">Please tap your bus card</h2>
         <div className="flex flex-col items-center">
           <div className="bg-sky-700 p-6 rounded-lg">
-          <img src="./Payfareicon.png" alt="Tap Card Icon" className="w-43 h-43" />
+           <img src="/Payfareicon.png" alt="Tap Card Icon" className="w-43 h-43" />
           </div>
         </div>
-        <div className="pt-[4vw] flex flex-1 justify-center items-center gap-[5vw] w-6/12"> 
-          <button className="border-none text-[3vw] w-full h-[6vw] outline-none bg-white text-black font-semibold rounded-lg">
-            Back
-          </button>
-          <button className="border-none text-[3vw] w-full h-[6vw] outline-none bg-white text-black font-semibold rounded-lg">
-            Exit
-          </button>
+
+        <div className="flex flex-col items-center justify-center">
+         <div className="pt-[4vw] flex flex-1 justify-center items-center gap-[5vw] w-6/12"> 
+         <Link className="w-full h-full" href={`/home/login/`}>
+             <button className="border-none text-[3vw] w-[12vw] h-[6vw] outline-none bg-white text-black font-semibold rounded-lg">
+              Back
+             </button>
+           </Link>
+           <Link className="w-full h-full" href={`/`}>
+             <button className="border-none text-[3vw] w-[12vw] h-[6vw] outline-none bg-white text-black font-semibold rounded-lg">
+              Exit
+             </button>
+           </Link>
+         </div>
         </div>
+
       </div>
     </div>
   );

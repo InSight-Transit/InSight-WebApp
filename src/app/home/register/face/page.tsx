@@ -1,4 +1,5 @@
-import NavHeader from "/src/app/header";
+import Link from "next/link";
+import NavHeader from "../../header";
 
 
 export default function Welcome() {
