@@ -14,12 +14,16 @@ export default function Welcome() {
       </div>
       <div className="flex flex-col items-center justify-center">
         <div className="pb-[4vw] flex flex-1 justify-center items-center gap-[5vw] w-6/12"> 
-          <button className="border-none text-[4.0vw] w-1/2 h-[11vw] outline-none bg-white text-black font-semibold rounded-lg">
-            Tap Card
-          </button>
-          <button className="border-none text-[4.0vw] w-1/2 h-[11vw] outline-none bg-white text-black font-semibold rounded-lg">
-            Scan Face
-          </button>
+          <Link className="w-1/2 h-[11vw]" href={`/home/login/tap`}>
+            <button className="border-none text-[4.0vw] w-full h-full outline-none bg-white text-black font-semibold rounded-lg">
+              Tap Card
+            </button>
+          </Link>
+          <Link className="w-1/2 h-[11vw]" href={`/home/login/face`}>
+            <button className="border-none text-[4.0vw] w-full h-full outline-none bg-white text-black font-semibold rounded-lg">
+              Scan Face
+            </button>
+          </Link>
         </div>
         <div className="pb-[4vw] flex flex-1 justify-center items-center gap-[5vw] w-6/12"> 
           <button className="border-none text-[5vw] w-full h-[11vw] outline-none bg-white text-black font-semibold rounded-lg">
@@ -27,7 +31,7 @@ export default function Welcome() {
           </button>
         </div>
         <div className="pt-[4vw] flex flex-1 justify-center items-center gap-[5vw] w-6/12"> 
-        <Link className="w-full h-[6vw]" href={`/home/`}>
+          <Link className="w-full h-[6vw]" href={`/home/`}>
             <button className="border-none text-[3vw] w-full h-full outline-none bg-white text-black font-semibold rounded-lg">
               Back
             </button>
