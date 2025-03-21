@@ -1,4 +1,5 @@
-import NavHeader from "/src/app/header";
+import Link from "next/link";
+import NavHeader from "../../../header";
 
 
 export default function Home() {
@@ -14,9 +15,11 @@ export default function Home() {
 
       <div className="flex flex-col items-center justify-center">
         <div className="pb-[4vw] flex flex-1 justify-center items-center gap-[5vw] w-6/12"> 
-          <button className="border-none text-[5vw] w-full h-[11vw] outline-none bg-white text-black font-semibold rounded-lg">
-            Cash / Coin
-          </button>
+          <Link className="w-full h-[11vw]" href={`/home/auth/reload/insertcash`}>
+            <button className="border-none text-[5vw] w-full h-full outline-none bg-white text-black font-semibold rounded-lg">
+              Cash / Coin
+            </button>
+          </Link>
         </div>
         <div className="pb-[4vw] flex flex-1 justify-center items-center gap-[5vw] w-6/12"> 
           <button className="border-none text-[5vw] w-full h-[11vw] outline-none bg-white text-black font-semibold rounded-lg">
