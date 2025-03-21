@@ -1,12 +1,12 @@
 "use client"; 
 import NavHeader from "@/app/header";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 
 
 export default function Welcome() {
   const [step, setStep] = useState(1);
-  const [time, setTime] = useState("");
+  // const [time, setTime] = useState("");
   const router = useRouter();
 
   const handleNext = () => {
