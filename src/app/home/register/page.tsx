@@ -108,11 +108,9 @@ export default function SignUp() {
               Exit
             </button>
           </Link>
-          <Link className="invisible w-full h-[6vw]" href={`/`}>
-            <button className="border-none text-[3vw] w-full h-full outline-none bg-white text-black font-semibold rounded-lg">
+            <button type="submit" className="border-none text-[3vw] w-full h-[6vw] outline-none bg-white text-black font-semibold rounded-lg">
               Confirm
             </button>
-          </Link>
         </div>
       </form>
     </div>
