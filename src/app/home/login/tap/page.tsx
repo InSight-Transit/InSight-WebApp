@@ -1,6 +1,5 @@
 import ButtonLinks from "@/app/components/ButtonLinks";
-import NavHeader from "../../../header";
-import Link from "next/link";
+import NavHeader from "@/app/header";
 
 export default function Welcome() {
   return (
