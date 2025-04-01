@@ -10,20 +10,20 @@ interface ButtonLinksProps {
 const ButtonLinks: React.FC<ButtonLinksProps> = ({ backHref, exitHref, agreeHref }) => {
   return (
     <div className="pt-[4vw] flex flex-1 justify-center items-center gap-[5vw] w-6/12">
-      <Link href={backHref || `../.`} className="w-full h-[6vw]">
+      <Link href={backHref || `../.`} className={`w-full h-[6vw] ${!backHref ? 'invisible' : ''}`}>
         <button className="border-none text-[3vw] w-full h-full outline-none bg-white text-black font-semibold rounded-lg">
           Back
         </button>
       </Link>
-      <Link href={exitHref || `/`} className="w-full h-[6vw]">
-          <button className="border-none text-[3vw] w-full h-full outline-none bg-white text-black font-semibold rounded-lg">
-            Exit
-          </button>
+      <Link href={exitHref || `/`} className={`w-full h-[6vw] ${!exitHref ? 'invisible' : ''}`}>
+        <button className="border-none text-[3vw] w-full h-full outline-none bg-white text-black font-semibold rounded-lg">
+          Exit
+        </button>
       </Link>
-      <Link href={agreeHref || `/`} className="invisible w-full h-[6vw]">
-          <button className="border-none text-[3vw] w-full h-full outline-none bg-white text-black font-semibold rounded-lg">
-            Agree
-          </button>
+      <Link href={agreeHref || `/`} className={`w-full h-[6vw] ${!agreeHref ? 'invisible' : ''}`}>
+        <button className="border-none text-[3vw] w-full h-full outline-none bg-white text-black font-semibold rounded-lg">
+          Agree
+        </button>
       </Link>
     </div>
   );

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import NavHeader from "../header";
+import ButtonLinks from "@/app/components/ButtonLinks";
 
 
 export default function Home() {
@@ -35,23 +36,10 @@ export default function Home() {
             Get Support
           </button>
         </div>
-        <div className="pt-[4vw] flex flex-1 justify-center items-center gap-[5vw] w-6/12"> 
-          <Link className="w-full h-[6vw]" href={`..`}>
-            <button className="border-none text-[3vw] w-full h-full outline-none bg-white text-black font-semibold rounded-lg">
-              Back
-            </button>
-          </Link>
-          <Link className="w-full h-[6vw]" href={`/`}>
-            <button className="border-none text-[3vw] w-full h-full outline-none bg-white text-black font-semibold rounded-lg">
-              Exit
-            </button>
-          </Link>
-          <Link className="invisible w-full h-[6vw]" href={`/`}>
-            <button className="border-none text-[3vw] w-full h-full outline-none bg-white text-black font-semibold rounded-lg">
-              Agree
-            </button>
-          </Link>
-        </div>
+        <ButtonLinks
+          backHref="/"  // You can customize this link
+          exitHref="/"           // Customize the exit link
+        />
       </div>
     </div>
   );
