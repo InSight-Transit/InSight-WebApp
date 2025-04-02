@@ -21,13 +21,13 @@ export async function POST(req) {
           price_data: {
             currency: "usd",
             product_data: { name: "Account Reload" },
-            unit_amount: amount, // Amount in cents
+            unit_amount: amount,
           },
           quantity: 1,
         },
       ],
-      success_url: `${process.env.NEXT_PUBLIC_BASE_URL}/success`,
-      cancel_url: `${process.env.NEXT_PUBLIC_BASE_URL}/cancel`,
+      success_url: `${process.env.NEXT_PUBLIC_BASE_URL}/addfunds?success=true&amount=${amount}`, // TODO: change URL so it does not display amount
+      cancel_url: `${process.env.NEXT_PUBLIC_BASE_URL}/addfunds?canceled=true`,
     });
 
     return new Response(JSON.stringify({ url: session.url }), { status: 200 });

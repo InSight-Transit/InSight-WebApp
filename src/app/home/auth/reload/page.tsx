@@ -1,8 +1,23 @@
+"use client";
 import Link from "next/link";
 import NavHeader from "../../../header";
-
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { useAuth } from "../../../components/authContext";
 
 export default function Home() {
+  const router = useRouter();
+  const { user, loading } = useAuth();
+
+  useEffect(() => {
+    if (!loading && !user) {
+      router.push("/home"); // Redirect to login if not authenticated
+                            // TODO: Add notification
+    }
+  }, [user, loading, router]);
+
+  if (loading) return <p>Loading...</p>;
+
   return (
     <div className="bg-sky-700 min-h-screen w-full">
       <NavHeader/>

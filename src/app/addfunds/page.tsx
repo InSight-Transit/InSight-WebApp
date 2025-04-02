@@ -1,13 +1,41 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 import NavHeader from "../header";
+import { useBalance } from "../components/balanceContext"
 
 export default function Home() {
-  const [amount, setAmount] = useState<number | "">(""); // Default: $10
+  // TODO: Implement authentication before trying balance
+  const [amount, setAmount] = useState<number | "">("");
   const [loading, setLoading] = useState(false);
+  const { balance } = useBalance();
 
-  const predefinedAmounts = [5, 10, 20, 50];
+  // Success/Cancel notification rather than redirect to page
+  // TODO: needs to disappear shortly after displaying however
+  const [message, setMessage] = useState<string | null>(null);
+  const searchParams = useSearchParams();
+  const router = useRouter();
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const success = params.get("success");
+    const canceled = params.get("canceled");
+
+    if (searchParams.get("success") === "true") {
+      setMessage("Payment Successful! Your balance has been updated.");
+    } else if (searchParams.get("canceled") === "true") {
+      setMessage("Payment Canceled. You can try again.");
+    }
+
+    // Remove query params after showing message
+    // Not working??
+    if (success || canceled) {
+      setTimeout(() => {
+        router.replace("/addfunds", undefined); // Removes query params
+      }, 3000);
+    }
+  }, []);
 
   const handlePayment = async () => {
     if (!amount || amount < 1) {
@@ -21,7 +49,7 @@ export default function Home() {
       const response = await fetch("/api/checkout", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ amount: amount * 100 }), // Convert to cents
+        body: JSON.stringify({ amount: amount * 100 }),
       });
 
       const data = await response.json();
@@ -43,6 +71,14 @@ export default function Home() {
       <div className="flex flex-1 justify-center items-center">
         <h1 className="text-white text-[8vw] font-bold p-[5vw]">InSight</h1>
       </div>
+      <h1>Balance: ${balance}</h1>
+      {message && (
+        <div className="flex justify-center items-center mt-5">
+          <div className="bg-white text-black p-4 rounded-lg text-center shadow-lg">
+            {message}
+          </div>
+        </div>
+      )}
       <div className="flex flex-1 justify-center items-center">
         <h2 className="text-white text-[3vw] font-bold pb-[4vw]">Choose an amount to reload</h2>
       </div>

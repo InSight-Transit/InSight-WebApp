@@ -1,6 +1,6 @@
 // auth.js
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "firebase/auth";
-import { getFirestore, collection, doc, setDoc } from "firebase/firestore";
+import { getFirestore, collection, doc, setDoc, getDoc, updateDoc, increment } from "firebase/firestore";
 import { app } from "./firebaseConfig";
 
 const auth = getAuth(app);
@@ -14,7 +14,7 @@ onAuthStateChanged(auth, (user) => {
     }
   });
 
-// Sign-up function
+// Sign-up function, updated with balance
 export const signUp = async (email, password, userData) => {
   try {
     // Create user in Firebase Authentication
@@ -27,6 +27,7 @@ export const signUp = async (email, password, userData) => {
       lastName: userData.lastName,
       phone: userData.phone,
       email: user.email,
+      balance: 0,
       createdAt: new Date(),
     });
 
@@ -38,17 +39,37 @@ export const signUp = async (email, password, userData) => {
   }
 };
 
-// Sign In function
+// Sign In (w/ balance)
 export const signIn = async (email, password) => {
   try {
     const userCredential = await signInWithEmailAndPassword(auth, email, password);
-    return userCredential.user;
+    const user = userCredential.user;
+
+    // Fetch user data from Firestore
+    const userDoc = await getDoc(doc(db, "users", user.uid));
+    if (userDoc.exists()) {
+      return { user, balance: userDoc.data().balance };
+    }
+
+    return { user, balance: 0 }; // Default balance if not found
   } catch (error) {
     console.error("Error signing in:", error);
+    return null;
   }
 };
 
-// Log Out function
+// Update user balance (used for Stripe)
+export const updateUserBalance = async (userId, amount) => {
+  try {
+    await updateDoc(doc(db, "users", userId), {
+      balance: increment(amount),
+    });
+  } catch (error) {
+    console.error("Error updating balance:", error);
+  }
+};
+
+// Log Out function (unused atm)
 export const logOut = async () => {
   try {
     await signOut(auth);
