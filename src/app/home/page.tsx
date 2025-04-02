@@ -38,7 +38,7 @@ export default function Home() {
         </div>
         <ButtonLinks
           backHref="/"  // You can customize this link
-          exitHref="/"           // Customize the exit link
+          exitHref="/"  // Customize the exit link
         />
       </div>
     </div>

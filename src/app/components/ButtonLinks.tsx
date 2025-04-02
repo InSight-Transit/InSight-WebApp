@@ -22,7 +22,7 @@ const ButtonLinks: React.FC<ButtonLinksProps> = ({ backHref, exitHref, agreeHref
       </Link>
       <Link href={agreeHref || `/`} className={`w-full h-[6vw] ${!agreeHref ? 'invisible' : ''}`}>
         <button className="border-none text-[3vw] w-full h-full outline-none bg-white text-black font-semibold rounded-lg">
-          Agree
+          Next
         </button>
       </Link>
     </div>
