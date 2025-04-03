@@ -1,29 +1,102 @@
-"use client"; 
+"use client";
+import { useEffect, useRef, useState } from "react";
+import ButtonLinks from "@/app/components/ButtonLinks";
 import NavHeader from "@/app/header";
-import { useState } from "react";
-import { useRouter } from "next/navigation";
 
 
 export default function Welcome() {
-  const [step, setStep] = useState(1);
-  // const [time, setTime] = useState("");
-  const router = useRouter();
-
-  const handleNext = () => {
-    if (step < 3) setStep(step + 1);
-  };
-
-  const handleBack = () => {
-    if (step === 1) {
-      router.back(); 
-    } else {
-      setStep(step - 1); 
+  const videoRef = useRef<HTMLVideoElement>(null);
+    const canvasRef = useRef<HTMLCanvasElement>(null);
+  
+    const [base64Image, setBase64Image] = useState('');
+  
+    const captureImage = () => {
+      // Flush variable states when you click verify
+      const video = videoRef.current;
+      const canvas = canvasRef.current;
+  
+      if (!canvas) {
+        console.error("Canvas element is not available.");
+        return;
+      }
+      if (!video) {
+        console.error("Video element is not available.");
+        return;
+      }
+  
+      const context = canvas.getContext('2d');
+      if (!context) {
+        console.error("Context element is not available.");
+        return;
+      }
+  
+      canvas.width = video.videoWidth;
+      canvas.height = video.videoHeight;
+  
+      context.drawImage(video, 0, 0, canvas.width, canvas.height);
+  
+      const base64Img = canvas.toDataURL('image/png');
+      setBase64Image(base64Img);
+  
+      // Only send the image after it's set
+      if (base64Img && base64Img !== "") {
+        verify(base64Img);
+      }
+    };
+  
+    // Convert base64 string to FormData and send it
+    async function verify(base64Img: string) {
+      const url = "http://127.0.0.1:8000/api/search";
+  
+      try {
+        // Convert base64 to Blob
+        const byteCharacters = atob(base64Img.split(',')[1]);
+        const byteArrays = [];
+        for (let offset = 0; offset < byteCharacters.length; offset++) {
+          byteArrays.push(byteCharacters.charCodeAt(offset));
+        }
+        const blob = new Blob([new Uint8Array(byteArrays)], { type: 'image/png' });
+  
+        // Create a FormData object and append the Blob
+        const formData = new FormData();
+        formData.append('file', blob, 'captured_image.png'); // 'file' matches the FastAPI UploadFile parameter name
+  
+        // Send the request with FormData
+        const response = await fetch(url, {
+          method: 'POST',
+          body: formData,
+        });
+  
+        if (!response.ok) {
+          throw new Error(`Response status: ${response.status}`);
+        }
+  
+        const json = await response.json();
+        console.log(json);
+      } catch (error) {
+        if (error instanceof Error) {
+          console.error(error.message);
+        } else {
+          console.error("An unknown error occurred.");
+        }
+      }
     }
-  };
-
-  const handleExit = () => {
-    router.push("/"); 
-  };
+  
+    useEffect(() => {
+      const video = videoRef.current;
+      if (video) {
+        const getVideo = async () => {
+          try {
+            const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+            video.srcObject = stream;
+            await video.play();
+          } catch (err) {
+            console.error("Error accessing webcam: ", err);
+          }
+        };
+        getVideo();
+      }
+    }, []);
 
   return (
     <div className="bg-sky-700 min-h-screen w-full">
@@ -36,29 +109,15 @@ export default function Welcome() {
       </div>
       <div className="flex flex-col items-center justify-center flex-grow">
         <div className="flex flex-col items-center">
-        <h3 className="text-white text-[2vw] pb-[1vw]">Step {step}</h3>
-        <div className="bg-sky-700 pb-6 rounded-lg">
-          <img src="../../scanfaceicon.png" alt="Scan Face Icon" className="w-43 h-43" />
+          <div className="bg-sky-700 p-6 rounded-lg">
+            <video ref={videoRef} style={{ width: "100%", maxWidth: "500px" }} autoPlay />
+          </div>
         </div>
-      </div>
 
-      <div className="pt-6 flex justify-center items-center gap-6 w-8/12">
-        <button 
-          onClick={handleBack} 
-          className="border-none text-[3vw] w-full h-[6vw] outline-none bg-white text-black font-semibold rounded-lg">
-          Back
-        </button>
-        <button 
-          onClick={handleExit} 
-          className="border-none text-[3vw] w-full h-[6vw] outline-none bg-white text-black font-semibold rounded-lg">
-          Exit
-        </button>
-        <button 
-          onClick={handleNext} 
-          className="border-none text-[3vw] w-full h-[6vw] outline-none bg-white text-black font-semibold rounded-lg">
-          Next
-        </button>
-      </div>
+      <ButtonLinks/>
+      <button onClick={() => captureImage()}> Capture </button>
+      <canvas ref={canvasRef} style={{ display: 'none' }} />
+      {/*base64Image && <img src={base64Image} alt="Captured frame" />*/}
       </div>
     </div>
   );

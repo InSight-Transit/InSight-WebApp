@@ -2,15 +2,16 @@
 import { useEffect, useRef, useState } from "react";
 import ButtonLinks from "@/app/components/ButtonLinks";
 import NavHeader from "@/app/header";
+import { useRouter } from "next/navigation";
 
 export default function Welcome() {
   const videoRef = useRef<HTMLVideoElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const router = useRouter();
 
-  const [base64Image, setBase64Image] = useState('');
+  const setBase64Image = useState('')[1];
 
   const captureImage = () => {
-    // Flush variable states when you click verify
     const video = videoRef.current;
     const canvas = canvasRef.current;
 
@@ -37,18 +38,15 @@ export default function Welcome() {
     const base64Img = canvas.toDataURL('image/png');
     setBase64Image(base64Img);
 
-    // Only send the image after it's set
     if (base64Img && base64Img !== "") {
       verify(base64Img);
     }
   };
 
-  // Convert base64 string to FormData and send it
   async function verify(base64Img: string) {
     const url = "http://127.0.0.1:8000/api/search";
 
     try {
-      // Convert base64 to Blob
       const byteCharacters = atob(base64Img.split(',')[1]);
       const byteArrays = [];
       for (let offset = 0; offset < byteCharacters.length; offset++) {
@@ -56,11 +54,9 @@ export default function Welcome() {
       }
       const blob = new Blob([new Uint8Array(byteArrays)], { type: 'image/png' });
 
-      // Create a FormData object and append the Blob
       const formData = new FormData();
-      formData.append('file', blob, 'captured_image.png'); // 'file' matches the FastAPI UploadFile parameter name
+      formData.append('file', blob, 'captured_image.png');
 
-      // Send the request with FormData
       const response = await fetch(url, {
         method: 'POST',
         body: formData,
@@ -71,7 +67,10 @@ export default function Welcome() {
       }
 
       const json = await response.json();
-      console.log(json);
+      console.log(json['Account ID']);
+      router.push(`/home/login/face/success?accountId=${json['Account ID']}`);
+      
+
     } catch (error) {
       if (error instanceof Error) {
         console.error(error.message);
@@ -95,6 +94,12 @@ export default function Welcome() {
       };
       getVideo();
     }
+
+    const interval = setInterval(() => {
+      captureImage();
+    }, 3000);
+
+    return () => clearInterval(interval);
   }, []);
 
   return (
@@ -108,14 +113,17 @@ export default function Welcome() {
       </div>
       <div className="flex flex-col items-center justify-center flex-grow">
         <div className="flex flex-col items-center">
-          <div className="bg-sky-700 p-6 rounded-lg">
-            <video ref={videoRef} style={{ width: "100%", maxWidth: "500px" }} autoPlay />
-          </div>
+            <div className="bg-sky-700 p-6 rounded-lg">
+            <video
+              ref={videoRef}
+              style={{ width: "100%", maxWidth: "500px", transform: "scaleX(-1)" }}
+              autoPlay
+            />
+            </div>
         </div>
         <ButtonLinks />
         <button onClick={() => captureImage()}> Capture </button>
         <canvas ref={canvasRef} style={{ display: 'none' }} />
-        {/*base64Image && <img src={base64Image} alt="Captured frame" />*/}
       </div>
     </div>
   );
