@@ -2,9 +2,11 @@
 import { useEffect, useRef, useState } from "react";
 import ButtonLinks from "@/app/components/ButtonLinks";
 import NavHeader from "@/app/header";
+import { auth } from "../../../../../firebaseConfig"; // Ensure you import Firebase
+import authWrapper from "@/app/components/authWrapper";
 
-
-export default function Welcome() {
+// changed to function to apply auth (user required)
+function Welcome() {
   const videoRef = useRef<HTMLVideoElement>(null);
     const canvasRef = useRef<HTMLCanvasElement>(null);
   
@@ -49,6 +51,12 @@ export default function Welcome() {
       const url = "http://127.0.0.1:8000/api/search";
   
       try {
+        const user = auth.currentUser;
+        if (!user) {
+          console.error("User not authenticated");
+          return;
+        }
+
         // Convert base64 to Blob
         const byteCharacters = atob(base64Img.split(',')[1]);
         const byteArrays = [];
@@ -60,6 +68,7 @@ export default function Welcome() {
         // Create a FormData object and append the Blob
         const formData = new FormData();
         formData.append('file', blob, 'captured_image.png'); // 'file' matches the FastAPI UploadFile parameter name
+        formData.append('userId', user.uid); // Send FirebaseUID to MongoDB
   
         // Send the request with FormData
         const response = await fetch(url, {
@@ -122,3 +131,5 @@ export default function Welcome() {
     </div>
   );
 }
+
+export default authWrapper(Welcome);
