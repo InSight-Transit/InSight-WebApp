@@ -1,5 +1,7 @@
 
-import NavHeader from "../../../header";
+import NavHeader from "@/app/header";
+import ButtonLinks from "@/app/components/ButtonLinks";
+
 
 export default function registration() {
   return (
@@ -17,7 +19,7 @@ export default function registration() {
             <p className="flex flex-1 justify-center items-center">
               A Terms and Conditions agreement is where you let the public know the terms, rules and guidelines for using your website or mobile app. 
               They include topics such as acceptable use, restricted behavior and limitations of liability. <br></br>
-              This article will get you started with creating your own custom Terms and Conditions agreement. We've also put together a Sample Terms 
+              This article will get you started with creating your own custom Terms and Conditions agreement. We have also put together a Sample Terms 
               and Conditions Template that you can use to help you write your own.
             </p>
           </div>

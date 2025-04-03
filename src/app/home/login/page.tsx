@@ -25,10 +25,12 @@ export default function Welcome() {
             </button>
           </Link>
         </div>
-        <div className="pb-[4vw] flex flex-1 justify-center items-center gap-[5vw] w-6/12"> 
+        <div className="pb-[4vw] flex flex-1 justify-center items-center gap-[5vw] w-6/12">
+        <Link className="w-full h-full" href={`/home/login/registerface/`}>
           <button className="border-none text-[5vw] w-full h-[11vw] outline-none bg-white text-black font-semibold rounded-lg">
             Register your face
           </button>
+          </Link>
         </div>
         <div className="pt-[4vw] flex flex-1 justify-center items-center gap-[5vw] w-6/12"> 
           <Link className="w-full h-[6vw]" href={`/home/`}>
@@ -36,13 +38,13 @@ export default function Welcome() {
               Back
             </button>
           </Link>
-          <Link className="w-full h-[6vw]" href={`/`}>
-            <button className="border-none text-[3vw] w-full h-full outline-none bg-white text-black font-semibold rounded-lg">
+          <Link className="w-full h-full" href={`/`}>
+            <button className="border-none text-[3vw] w-full h-[6vw] outline-none bg-white text-black font-semibold rounded-lg">
               Exit
             </button>
           </Link>
-          <Link className="invisible w-full h-[6vw]" href={`/`}>
-            <button className="border-none text-[3vw] w-full h-full outline-none bg-white text-black font-semibold rounded-lg">
+          <Link className="invisible w-full h-full" href={`/`}>
+            <button className="border-none text-[3vw] w-full h-[6vw] outline-none bg-white text-black font-semibold rounded-lg">
               Agree
             </button>
           </Link>

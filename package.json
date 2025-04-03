@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "test": "echo \"No tests available\" && exit 0"
   },
   "dependencies": {
     "@stripe/react-stripe-js": "^3.5.1",
