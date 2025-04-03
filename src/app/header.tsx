@@ -14,7 +14,7 @@ function NavHeader() {
       {user && (
         <button onClick={logout} className="text-white text-lg">Logout</button>
       )}
-      <DigitalClock/>      
+      <DigitalClock/>
     </div>
   );
 }

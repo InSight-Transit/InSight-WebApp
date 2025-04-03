@@ -4,7 +4,8 @@ import { useRouter } from "next/navigation";
 import { signIn } from "../../../auth";
 
 // TEMP Login page to see if authentication is working
-// It is! But need to link to MongoDB...
+// need to link to MongoDB and scan face instead for actual login
+// Replace with homepage(?)
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");

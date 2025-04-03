@@ -2,7 +2,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { auth, logOut } from "../../../auth"; // Import from auth.js
 import { onAuthStateChanged, User } from "firebase/auth";
-import { getDoc, doc, getFirestore } from "firebase/firestore";
+import { getFirestore, doc, onSnapshot } from "firebase/firestore";
 import { app } from "../../../firebaseConfig";
 
 const db = getFirestore(app);
@@ -24,24 +24,41 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, async (user) => {
-      if (user) {
-        setUser(user);
+    let unsubscribeBalance: (() => void) | null = null; // Store Firestore listener
 
-        // Fetch balance from Firestore
-        const userDoc = await getDoc(doc(db, "users", user.uid));
-        if (userDoc.exists()) {
-          setBalance(userDoc.data().balance);
-        }
-      } else {
-        setUser(null);
-        setBalance(0);
-      }
+    const unsubscribeAuth = onAuthStateChanged(auth, (user) => {
+      setUser(user);
       setLoading(false);
+
+      if (user) {
+        const userRef = doc(db, "users", user.uid);
+
+        // Subscribe to real-time balance updates
+        unsubscribeBalance = onSnapshot(
+          userRef,
+          (docSnapshot) => {
+            if (docSnapshot.exists()) {
+              setBalance(docSnapshot.data().balance || 0);
+            }
+          },
+          (error) => {
+            console.error("❌ Firestore error:", error);
+          }
+        );
+      } else {
+        setBalance(0);
+        if (unsubscribeBalance) {
+          unsubscribeBalance(); // Stop listening when user logs out
+        }
+      }
     });
 
-    return () => unsubscribe(); // Cleanup subscription
+    return () => {
+      unsubscribeAuth(); // Cleanup auth listener
+      if (unsubscribeBalance) unsubscribeBalance(); // Cleanup Firestore listener
+    };
   }, []);
+
 
   return (
     <AuthContext.Provider value={{ user, balance, loading, logout: logOut }}>
@@ -50,6 +67,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   );
 }
 
+// Custom Hook
 export function useAuth() {
   const context = useContext(AuthContext);
   if (!context) {

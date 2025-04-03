@@ -1,42 +1,67 @@
 "use client";
 
-import { createContext, useContext, useEffect, useState } from "react";
-import { auth } from "../../../auth";
-import { getFirestore, doc, getDoc, setDoc } from "firebase/firestore";
+import { createContext, useContext, useState, useEffect, ReactNode } from "react";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { getFirestore, doc, getDoc, updateDoc } from "firebase/firestore";
 import { app } from "../../../firebaseConfig";
 
+const auth = getAuth(app);
 const db = getFirestore(app);
 
-interface BalanceContextType {
+type BalanceContextType = {
   balance: number;
   setBalance: (balance: number) => void;
-}
+  updateBalanceInFirestore: (amount: number) => Promise<void>;
+  refreshBalance: () => Promise<void>;
+};
 
 const BalanceContext = createContext<BalanceContextType | undefined>(undefined);
 
-export function BalanceProvider({ children }: { children: React.ReactNode }) {
+export function BalanceProvider({ children }: { children: ReactNode }) {
   const [balance, setBalance] = useState<number>(0);
+  const [userId, setUserId] = useState<string | null>(null);
 
   useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged(async (user) => {
+    const unsubscribe = onAuthStateChanged(auth, async (user) => {
       if (user) {
-        const userDocRef = doc(db, "users", user.uid);
-        const userDocSnap = await getDoc(userDocRef);
-
-        if (userDocSnap.exists()) {
-          setBalance(userDocSnap.data().balance || 0);
-        } else {
-          await setDoc(userDocRef, { balance: 0 }, { merge: true });
-          setBalance(0);
-        }
+        setUserId(user.uid);
+        await refreshBalance(user.uid);
+      } else {
+        setUserId(null);
+        setBalance(0);
       }
     });
 
     return () => unsubscribe();
   }, []);
 
+  const refreshBalance = async (uid?: string) => {
+    const id = uid || userId;
+    if (!id) return;
+    try {
+      const userRef = doc(db, "users", id);
+      const userDoc = await getDoc(userRef);
+      if (userDoc.exists()) {
+        setBalance(userDoc.data().balance || 0);
+      }
+    } catch (error) {
+      console.error("Error refreshing balance:", error);
+    }
+  };
+
+  const updateBalanceInFirestore = async (amount: number) => {
+    if (!userId) return;
+    try {
+      const userRef = doc(db, "users", userId);
+      await updateDoc(userRef, { balance: amount });
+      setBalance(amount);
+    } catch (error) {
+      console.error("Error updating balance:", error);
+    }
+  };
+
   return (
-    <BalanceContext.Provider value={{ balance, setBalance }}>
+    <BalanceContext.Provider value={{ balance, setBalance, updateBalanceInFirestore, refreshBalance }}>
       {children}
     </BalanceContext.Provider>
   );

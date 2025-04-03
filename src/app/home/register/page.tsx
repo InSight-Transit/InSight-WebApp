@@ -1,4 +1,4 @@
-"use client"; // Ensure it's a Client Component
+"use client";
 
 import { useState } from "react";
 import { signUp } from "../../../../auth";
@@ -14,7 +14,6 @@ export default function SignUp() {
 
   const handleSignUp = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    //const user = await signUp(email, password);
     const userData = { firstName, lastName, phone };
     const user = await signUp(email, password, userData);
     if (user) {

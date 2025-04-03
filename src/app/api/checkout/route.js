@@ -1,16 +1,17 @@
 import Stripe from 'stripe';
 
+// redirects users to a checkout page to reload account
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
   apiVersion: '2022-11-15',
 });
 
 export async function POST(req) {
   try {
-    const { amount } = await req.json();
-    console.log("Received data:", amount)
+    const { amount, userId } = await req.json();
+    console.log("Received data:", { amount, userId });
 
-    if (!amount || amount < 100) {
-      return new Response(JSON.stringify({ error: "Invalid amount" }), { status: 400 });
+    if (!amount || amount < 100 || !userId) {
+      return new Response(JSON.stringify({ error: "Invalid request data" }), { status: 400 });
     }
 
     const session = await stripe.checkout.sessions.create({
@@ -26,8 +27,9 @@ export async function POST(req) {
           quantity: 1,
         },
       ],
-      success_url: `${process.env.NEXT_PUBLIC_BASE_URL}/addfunds?success=true&amount=${amount}`, // TODO: change URL so it does not display amount
+      success_url: `${process.env.NEXT_PUBLIC_BASE_URL}/addfunds?success=true`,
       cancel_url: `${process.env.NEXT_PUBLIC_BASE_URL}/addfunds?canceled=true`,
+      metadata: { userId }
     });
 
     return new Response(JSON.stringify({ url: session.url }), { status: 200 });

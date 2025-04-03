@@ -4,15 +4,18 @@ import { useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import NavHeader from "../header";
 import { useBalance } from "../components/balanceContext"
+import { useAuth } from "../components/authContext";  // Import AuthContext
+import { getFirestore } from "firebase/firestore";
+import authWrapper from "@/app/components/authWrapper"
 
-export default function Home() {
-  // TODO: Implement authentication before trying balance
+const db = getFirestore();
+
+// encapsulated by authWrapper
+function Home() {
   const [amount, setAmount] = useState<number | "">("");
   const [loading, setLoading] = useState(false);
-  const { balance } = useBalance();
-
-  // Success/Cancel notification rather than redirect to page
-  // TODO: needs to disappear shortly after displaying however
+  const { balance, refreshBalance } = useBalance();
+  const {user} = useAuth();
   const [message, setMessage] = useState<string | null>(null);
   const searchParams = useSearchParams();
   const router = useRouter();
@@ -24,22 +27,27 @@ export default function Home() {
 
     if (searchParams.get("success") === "true") {
       setMessage("Payment Successful! Your balance has been updated.");
+      refreshBalance();
     } else if (searchParams.get("canceled") === "true") {
       setMessage("Payment Canceled. You can try again.");
     }
 
-    // Remove query params after showing message
-    // Not working??
     if (success || canceled) {
       setTimeout(() => {
-        router.replace("/addfunds", undefined); // Removes query params
+        router.replace("/addfunds", {scroll: false});
+        setMessage(null);
       }, 3000);
     }
-  }, []);
+  }, [searchParams, router, refreshBalance()]);
 
   const handlePayment = async () => {
     if (!amount || amount < 1) {
       alert("Please enter a valid amount (minimum $1)");
+      return;
+    }
+
+    if (!user) {
+      alert("You must be signed in to add funds.");
       return;
     }
 
@@ -49,10 +57,14 @@ export default function Home() {
       const response = await fetch("/api/checkout", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ amount: amount * 100 }),
+        body: JSON.stringify({
+          amount: amount * 100,
+          userId: user.uid,
+        }),
       });
-
-      const data = await response.json();
+      const text = await response.text();
+      console.log("API Response:", text);
+      const data = JSON.parse(text);
       if (data.url) {
         window.location.href = data.url; // Redirect to Stripe Checkout
       } else {
@@ -132,3 +144,5 @@ export default function Home() {
     </div>
   );
 }
+
+export default authWrapper(Home);

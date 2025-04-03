@@ -1,10 +1,16 @@
 // auth.js
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged, setPersistence, browserLocalPersistence } from "firebase/auth";
 import { getFirestore, collection, doc, setDoc, getDoc, updateDoc, increment } from "firebase/firestore";
 import { app } from "./firebaseConfig";
 
 const auth = getAuth(app);
 const db = getFirestore(app);
+
+// Ensure auth state is persisted
+setPersistence(auth, browserLocalPersistence)
+  .then(() => console.log("Auth persistence enabled"))
+  .catch(error => console.error("Error enabling auth persistence:", error));
+
 
 onAuthStateChanged(auth, (user) => {
     if (user) {
@@ -14,7 +20,7 @@ onAuthStateChanged(auth, (user) => {
     }
   });
 
-// Sign-up function, updated with balance
+  // Sign-up function, updated with balance
 export const signUp = async (email, password, userData) => {
   try {
     // Create user in Firebase Authentication
@@ -45,13 +51,12 @@ export const signIn = async (email, password) => {
     const userCredential = await signInWithEmailAndPassword(auth, email, password);
     const user = userCredential.user;
 
-    // Fetch user data from Firestore
     const userDoc = await getDoc(doc(db, "users", user.uid));
     if (userDoc.exists()) {
       return { user, balance: userDoc.data().balance };
     }
 
-    return { user, balance: 0 }; // Default balance if not found
+    return { user, balance: 0 };
   } catch (error) {
     console.error("Error signing in:", error);
     return null;
