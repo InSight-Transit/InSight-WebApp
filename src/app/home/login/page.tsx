@@ -1,6 +1,6 @@
 import Link from "next/link";
 import NavHeader from "../../header";
-
+import ButtonLinks from "@/app/components/ButtonLinks";
 
 export default function Welcome() {
   return (
@@ -32,23 +32,8 @@ export default function Welcome() {
           </button>
           </Link>
         </div>
-        <div className="pt-[4vw] flex flex-1 justify-center items-center gap-[5vw] w-6/12"> 
-          <Link className="w-full h-[6vw]" href={`/home/`}>
-            <button className="border-none text-[3vw] w-full h-full outline-none bg-white text-black font-semibold rounded-lg">
-              Back
-            </button>
-          </Link>
-          <Link className="w-full h-full" href={`/`}>
-            <button className="border-none text-[3vw] w-full h-[6vw] outline-none bg-white text-black font-semibold rounded-lg">
-              Exit
-            </button>
-          </Link>
-          <Link className="invisible w-full h-full" href={`/`}>
-            <button className="border-none text-[3vw] w-full h-[6vw] outline-none bg-white text-black font-semibold rounded-lg">
-              Agree
-            </button>
-          </Link>
-        </div>
+        <ButtonLinks
+        />
       </div>
     </div>
   );

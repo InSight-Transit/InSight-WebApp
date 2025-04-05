@@ -1,5 +1,6 @@
 
 import NavHeader from "../header";
+import ButtonLinks from "@/app/components/ButtonLinks";
 
 export default function Home() {
   return (
@@ -44,6 +45,7 @@ export default function Home() {
             Confirm
           </button>
         </div>
+        <ButtonLinks/>
       </div>
     </div>
   );
