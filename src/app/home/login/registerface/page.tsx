@@ -8,23 +8,6 @@ import ButtonLinks from "@/app/components/ButtonLinks";
 export default function Welcome() {
   const [step, setStep] = useState(1);
   // const [time, setTime] = useState("");
-  const router = useRouter();
-
-  const handleNext = () => {
-    if (step < 3) setStep(step + 1);
-  };
-
-  const handleBack = () => {
-    if (step === 1) {
-      router.back(); 
-    } else {
-      setStep(step - 1); 
-    }
-  };
-
-  const handleExit = () => {
-    router.push("/"); 
-  };
 
   return (
     <div className="bg-sky-700 min-h-screen w-full">
@@ -44,7 +27,9 @@ export default function Welcome() {
       </div>
 
       <div className="pt-6 flex justify-center items-center gap-6 w-8/12">
-      <ButtonLinks/>
+      <ButtonLinks
+      agreeHref="@src\app\home\register\terms\page.tsx"
+      />
       </div>
       </div>
     </div>

@@ -21,7 +21,13 @@ interface ButtonLinksProps {
     * Provide a non-empty string to show it.
     */ 
   agreeHref?: string; 
-    /** Custom label for the Next button. Defaults to "Next" */
+    /** Custom label for the Next button. Defaults to "Next" 
+    * For example:
+    *   <ButtonLinks
+        agreeHref="/"
+        agreeLabel="Confirm"  //without this prop, it will be "Next"
+        />
+    */
   agreeLabel?: string;
 }
 
