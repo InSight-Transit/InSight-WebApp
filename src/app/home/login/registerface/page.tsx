@@ -2,6 +2,7 @@
 import NavHeader from "@/app/header";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import ButtonLinks from "@/app/components/ButtonLinks";
 
 
 export default function Welcome() {
@@ -43,21 +44,7 @@ export default function Welcome() {
       </div>
 
       <div className="pt-6 flex justify-center items-center gap-6 w-8/12">
-        <button 
-          onClick={handleBack} 
-          className="border-none text-[3vw] w-full h-[6vw] outline-none bg-white text-black font-semibold rounded-lg">
-          Back
-        </button>
-        <button 
-          onClick={handleExit} 
-          className="border-none text-[3vw] w-full h-[6vw] outline-none bg-white text-black font-semibold rounded-lg">
-          Exit
-        </button>
-        <button 
-          onClick={handleNext} 
-          className="border-none text-[3vw] w-full h-[6vw] outline-none bg-white text-black font-semibold rounded-lg">
-          Next
-        </button>
+      <ButtonLinks/>
       </div>
       </div>
     </div>

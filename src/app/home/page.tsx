@@ -36,10 +36,7 @@ export default function Home() {
             Get Support
           </button>
         </div>
-        <ButtonLinks
-          backHref="/"  // You can customize this link
-          exitHref="/"  // Customize the exit link
-        />
+        <ButtonLinks/>
       </div>
     </div>
   );
