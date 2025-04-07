@@ -13,8 +13,8 @@ export default function Welcome() {
       </div>
       <div className="flex flex-col items-center justify-center flex-grow">
         <div className="flex flex-col items-center">
-         <div className="bg-sky-700 p-6 rounded-lg">
-          <img src="../../scanfaceicon.png" alt="Scan Face Icon" className="w-43 h-43" />
+          <div className="bg-sky-700 p-6 rounded-lg">
+            <img src="../../scanfaceicon.png" alt="Scan Face Icon" className="w-43 h-43" />
           </div>
         </div>
         <ButtonLinks/>
