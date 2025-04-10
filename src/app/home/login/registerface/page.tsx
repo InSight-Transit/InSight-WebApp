@@ -48,7 +48,7 @@ function Welcome() {
   
     // Convert base64 string to FormData and send it
     async function verify(base64Img: string) {
-      const url = "http://127.0.0.1:8000/api/search";
+      const url = "http://127.0.0.1:8000/api/addface";
   
       try {
         const user = auth.currentUser;
@@ -68,8 +68,8 @@ function Welcome() {
         // Create a FormData object and append the Blob
         const formData = new FormData();
         formData.append('file', blob, 'captured_image.png'); // 'file' matches the FastAPI UploadFile parameter name
-        formData.append('userId', user.uid); // Send FirebaseUID to MongoDB
-  
+        formData.append('user_id', user.uid); // Convert integer to string
+
         // Send the request with FormData
         const response = await fetch(url, {
           method: 'POST',
