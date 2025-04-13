@@ -1,7 +1,9 @@
+"use client";
+import authWrapper from "@/app/components/authWrapper";
 import NavHeader from "@/app/header";
 
-
-export default function Welcome() {
+// encapsulated by authWrapper
+function Welcome() {
   return (
     <div className="bg-sky-700 min-h-screen w-full">
       <NavHeader/>
@@ -29,3 +31,5 @@ export default function Welcome() {
     </div>
   );
 }
+
+export default authWrapper(Welcome);
