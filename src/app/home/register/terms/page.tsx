@@ -1,6 +1,8 @@
 
 import ButtonLinks from "@/app/components/ButtonLinks";
 import NavHeader from "@/app/header";
+import ButtonLinks from "@/app/components/ButtonLinks";
+
 
 export default function registration() {
   return (
