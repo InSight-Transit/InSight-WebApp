@@ -28,7 +28,7 @@ export default function Welcome() {
         <div className="pb-[4vw] flex flex-1 justify-center items-center gap-[5vw] w-6/12">
         <Link className="w-full h-full" href={`/home/login/registerface/`}>
           <button className="border-none text-[5vw] w-full h-[11vw] outline-none bg-white text-black font-semibold rounded-lg">
-            Register your face
+            Admin Login
           </button>
           </Link>
         </div>
