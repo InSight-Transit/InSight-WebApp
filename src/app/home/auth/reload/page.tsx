@@ -1,9 +1,12 @@
+"use client";
 import Link from "next/link";
 import NavHeader from "../../../header";
+import authWrapper from "@/app/components/authWrapper";
 import ButtonLinks from "@/app/components/ButtonLinks";
 
+// encapsulated by authWrapper
+function Home() {
 
-export default function Home() {
   return (
     <div className="bg-sky-700 min-h-screen w-full">
       <NavHeader/>
@@ -33,3 +36,5 @@ export default function Home() {
     </div>
   );
 }
+
+export default authWrapper(Home);
