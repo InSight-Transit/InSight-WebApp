@@ -38,6 +38,7 @@ export const signUp = async (email, password, userData) => {
     });
 
     console.log("User registered successfully:", user);
+    await signOut(auth); // Sign out the user after creating
     return user;
   } catch (error) {
     console.error("Error signing up:", error);

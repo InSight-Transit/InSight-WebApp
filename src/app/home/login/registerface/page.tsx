@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef} from "react";
 import NavHeader from "@/app/header";
 import ButtonLinks from "@/app/components/ButtonLinks";
 
@@ -11,7 +11,7 @@ function Welcome() {
   const videoRef = useRef<HTMLVideoElement>(null);
     const canvasRef = useRef<HTMLCanvasElement>(null);
   
-    const [base64Image, setBase64Image] = useState('');
+    //const [base64Image, setBase64Image] = useState('');
   
     const captureImage = () => {
       // Flush variable states when you click verify
@@ -39,7 +39,7 @@ function Welcome() {
       context.drawImage(video, 0, 0, canvas.width, canvas.height);
   
       const base64Img = canvas.toDataURL('image/png');
-      setBase64Image(base64Img);
+      //setBase64Image(base64Img);
   
       // Only send the image after it's set
       if (base64Img && base64Img !== "") {

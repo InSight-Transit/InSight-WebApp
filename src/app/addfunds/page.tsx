@@ -6,10 +6,10 @@ import NavHeader from "../header";
 import ButtonLinks from "@/app/components/ButtonLinks";
 import { useBalance } from "../components/balanceContext"
 import { useAuth } from "../components/authContext";  // Import AuthContext
-import { getFirestore } from "firebase/firestore";
+//import { getFirestore } from "firebase/firestore";
 import authWrapper from "@/app/components/authWrapper"
 
-const db = getFirestore();
+//const db = getFirestore();
 
 // encapsulated by authWrapper
 function Home() {
@@ -39,7 +39,7 @@ function Home() {
         setMessage(null);
       }, 3000);
     }
-  }, [searchParams, router, refreshBalance()]);
+  }, [searchParams, router, refreshBalance]);
 
   const handlePayment = async () => {
     if (!amount || amount < 1) {

@@ -1,10 +1,11 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
-import ButtonLinks from "@/app/components/ButtonLinks";
+// import { useEffect, useRef, useState } from "react";
+// import ButtonLinks from "@/app/components/ButtonLinks";
+import { Suspense } from "react";
 import NavHeader from "@/app/header";
 import { useSearchParams } from "next/navigation";
 
-export default function Welcome() {
+function SuccessPage() {
   const searchParams = useSearchParams();
   const accountId = searchParams.get("accountId");
 
@@ -18,5 +19,13 @@ export default function Welcome() {
         <h2 className="text-white text-[3vw] font-bold pb-[4vw]">Successfully logged in as user {accountId}!</h2>
       </div>
     </div>
+  );
+}
+
+export default function Welcome() {
+  return (
+    <Suspense fallback={<p>Loading...</p>}>
+      <SuccessPage />
+    </Suspense>
   );
 }
