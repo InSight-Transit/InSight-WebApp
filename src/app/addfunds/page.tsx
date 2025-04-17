@@ -6,7 +6,7 @@ import NavHeader from "../header";
 import ButtonLinks from "@/app/components/ButtonLinks";
 import { useBalance } from "../components/balanceContext"
 import { useAuth } from "../components/authContext";  // Import AuthContext
-import { getFirestore } from "firebase/firestore";
+//import { getFirestore } from "firebase/firestore";
 import authWrapper from "@/app/components/authWrapper"
 
 //const db = getFirestore();
