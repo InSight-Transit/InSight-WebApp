@@ -12,7 +12,7 @@ function Welcome() {
   const videoRef = useRef<HTMLVideoElement>(null);
     const canvasRef = useRef<HTMLCanvasElement>(null);
   
-    const [base64Image, setBase64Image] = useState('');
+    const [_base64Image, setBase64Image] = useState('');
   
     const captureImage = () => {
       // Flush variable states when you click verify

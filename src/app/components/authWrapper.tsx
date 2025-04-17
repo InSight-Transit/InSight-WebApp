@@ -3,8 +3,8 @@ import { useRouter } from "next/navigation";
 import { useAuth } from "./authContext";
 
 // Used to protect/redirect pages requiring user to be logged in
-export default function withAuth(Component: React.FC) {
-  return function ProtectedPage(props: any) {
+export default function withAuth<T extends object>(Component: React.FC) {
+  return function ProtectedPage(props: T) {
     const { user, loading } = useAuth();
     const router = useRouter();
 
