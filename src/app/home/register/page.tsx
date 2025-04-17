@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { signUp } from "../../../../auth";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
 import NavHeader from "@/app/header";
 import ButtonLinks from "@/app/components/ButtonLinks";
@@ -13,13 +14,17 @@ export default function SignUp() {
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const router = useRouter();
 
   const handleSignUp = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const userData = { firstName, lastName, phone };
     const user = await signUp(email, password, userData);
+    // Remove alert and use a different method to show success or error messages
+    // For example, you can use a toast notification or a modal
     if (user) {
       alert("Sign-up successful!");
+      router.push("/home/login");
     } else {
       console.error("Sign-up failed");
     }
