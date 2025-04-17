@@ -57,7 +57,6 @@ function Welcome() {
           return;
         }
 
-        // Convert base64 to Blob
         const byteCharacters = atob(base64Img.split(',')[1]);
         const byteArrays = [];
         for (let offset = 0; offset < byteCharacters.length; offset++) {
@@ -65,12 +64,11 @@ function Welcome() {
         }
         const blob = new Blob([new Uint8Array(byteArrays)], { type: 'image/png' });
   
-        // Create a FormData object and append the Blob
+        // Create formdata object for sending to API
         const formData = new FormData();
-        formData.append('file', blob, 'captured_image.png'); // 'file' matches the FastAPI UploadFile parameter name
-        formData.append('user_id', user.uid); // Convert integer to string
+        formData.append('file', blob, 'captured_image.png');
+        formData.append('user_id', user.uid); 
 
-        // Send the request with FormData
         const response = await fetch(url, {
           method: 'POST',
           body: formData,
