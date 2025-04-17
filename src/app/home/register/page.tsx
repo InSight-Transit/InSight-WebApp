@@ -2,10 +2,9 @@
 
 import { useState } from "react";
 import { signUp } from "../../../../auth";
-import { useRouter } from "next/navigation";
 import Link from "next/link";
 import NavHeader from "@/app/header";
-import ButtonLinks from "@/app/components/ButtonLinks";
+import { useRouter } from "next/navigation";
 
 // use ButtonLinks component to replace the back and exit buttons
 export default function SignUp() {
@@ -20,11 +19,8 @@ export default function SignUp() {
     e.preventDefault();
     const userData = { firstName, lastName, phone };
     const user = await signUp(email, password, userData);
-    // Remove alert and use a different method to show success or error messages
-    // For example, you can use a toast notification or a modal
     if (user) {
-      alert("Sign-up successful!");
-      router.push("/home/login");
+      router.push("/home/register/terms");
     } else {
       console.error("Sign-up failed");
     }
