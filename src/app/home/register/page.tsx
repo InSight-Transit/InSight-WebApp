@@ -4,20 +4,23 @@ import { useState } from "react";
 import { signUp } from "../../../../auth";
 import Link from "next/link";
 import NavHeader from "@/app/header";
+import { useRouter } from "next/navigation";
 
+// use ButtonLinks component to replace the back and exit buttons
 export default function SignUp() {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const router = useRouter();
 
   const handleSignUp = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const userData = { firstName, lastName, phone };
     const user = await signUp(email, password, userData);
     if (user) {
-      alert("Sign-up successful!");
+      router.push("/home/register/terms");
     } else {
       console.error("Sign-up failed");
     }

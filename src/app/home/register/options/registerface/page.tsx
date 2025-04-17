@@ -1,9 +1,10 @@
 "use client";
-import { useEffect, useRef} from "react";
+import { useEffect, useRef, useState } from "react";
 import NavHeader from "@/app/header";
 import ButtonLinks from "@/app/components/ButtonLinks";
 
-import { auth } from "../../../../../firebaseConfig"; // Ensure you import Firebase
+import { auth } from "../../../../../../firebaseConfig";
+ // Ensure you import Firebase
 import authWrapper from "@/app/components/authWrapper";
 
 // changed to function to apply auth (user required)
@@ -11,7 +12,9 @@ function Welcome() {
   const videoRef = useRef<HTMLVideoElement>(null);
     const canvasRef = useRef<HTMLCanvasElement>(null);
   
-    //const [base64Image, setBase64Image] = useState('');
+    // Original:
+    // const [_base64Image, setBase64Image] = useState('');
+    const [, setBase64Image] = useState('');
   
     const captureImage = () => {
       // Flush variable states when you click verify
@@ -39,7 +42,7 @@ function Welcome() {
       context.drawImage(video, 0, 0, canvas.width, canvas.height);
   
       const base64Img = canvas.toDataURL('image/png');
-      //setBase64Image(base64Img);
+      setBase64Image(base64Img);
   
       // Only send the image after it's set
       if (base64Img && base64Img !== "") {
@@ -58,6 +61,7 @@ function Welcome() {
           return;
         }
 
+        // Convert base64 to Blob
         const byteCharacters = atob(base64Img.split(',')[1]);
         const byteArrays = [];
         for (let offset = 0; offset < byteCharacters.length; offset++) {
@@ -65,11 +69,12 @@ function Welcome() {
         }
         const blob = new Blob([new Uint8Array(byteArrays)], { type: 'image/png' });
   
-        // Create formdata object for sending to API
+        // Create a FormData object and append the Blob
         const formData = new FormData();
-        formData.append('file', blob, 'captured_image.png');
-        formData.append('user_id', user.uid); 
+        formData.append('file', blob, 'captured_image.png'); // 'file' matches the FastAPI UploadFile parameter name
+        formData.append('user_id', user.uid); // Convert integer to string
 
+        // Send the request with FormData
         const response = await fetch(url, {
           method: 'POST',
           body: formData,

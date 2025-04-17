@@ -2,6 +2,7 @@
 import Link from "next/link";
 import NavHeader from "../../../header";
 import authWrapper from "@/app/components/authWrapper";
+import ButtonLinks from "@/app/components/ButtonLinks";
 
 // encapsulated by authWrapper
 function Home() {
@@ -29,18 +30,8 @@ function Home() {
             Card / NFC
           </button>
         </div>
-
-        <div className="pt-[4vw] flex flex-1 justify-center items-center gap-[5vw] w-6/12"> 
-          <button className="border-none text-[3vw] w-full h-[6vw] outline-none bg-white text-black font-semibold rounded-lg">
-            Back
-          </button>
-          <button className="border-none text-[3vw] w-full h-[6vw] outline-none bg-white text-black font-semibold rounded-lg">
-            Exit
-          </button>
-          <button className="border-none text-[3vw] w-full h-[6vw] outline-none bg-white text-black font-semibold rounded-lg">
-            Agree
-          </button>
-        </div>
+        <ButtonLinks/>
+        
       </div>
     </div>
   );

@@ -1,4 +1,3 @@
-
 import NavHeader from "@/app/header";
 import ButtonLinks from "@/app/components/ButtonLinks";
 
@@ -24,17 +23,10 @@ export default function registration() {
             </p>
           </div>
         </div>
-        <div className="pt-[4vw] flex flex-1 justify-center items-center gap-[5vw] w-6/12"> 
-          <button className="border-none text-[2vw] w-full h-[6vw] outline-none bg-white text-black font-semibold rounded-lg">
-            Back
-          </button>
-          <button className="border-none text-[3vw] w-full h-[6vw] outline-none bg-white text-black font-semibold rounded-lg">
-            Exit
-          </button>
-          <button className="border-none text-[3vw] w-full h-[6vw] outline-none bg-white text-black font-semibold rounded-lg">
-            Confirm
-          </button>
-        </div>
+        <ButtonLinks
+        agreeHref="/home/register/options"
+        agreeLabel="Confirm"
+        />
       </div>
     </div>
   );

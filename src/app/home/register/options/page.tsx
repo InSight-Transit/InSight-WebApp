@@ -1,7 +1,8 @@
+import NavHeader from "@/app/header";
+import ButtonLinks from "@/app/components/ButtonLinks";
+import Link from "next/link";
 
-import NavHeader from "../../../header";
-
-export default function registration() {
+export default function OptionsPage() {
   return (
     <div className="bg-sky-700 min-h-screen w-full">
       <NavHeader/>
@@ -14,23 +15,23 @@ export default function registration() {
       <div className="flex flex-col items-center justify-center">
         <div className="py-[13vw] flex flex-1 justify-center items-center gap-[5vw] w-6/12"> 
           <button className="border-none text-[4.0vw] w-1/2 h-[11vw] outline-none bg-white text-black font-semibold rounded-lg">
-          Purchase Card
+            Purchase Card
           </button>
-          <button className="border-none text-[4.0vw] w-1/2 h-[11vw] outline-none bg-white text-black font-semibold rounded-lg">
-            Scan Face
-          </button>
+          <Link className="w-full h-full" href={`/home/register/options/registerface/`}>
+            <button className="border-none text-[4.0vw] w-1/2 h-[11vw] outline-none bg-white text-black font-semibold rounded-lg">
+              Register Face
+            </button>
+          </Link>
         </div>
-        <div className="pt-[4vw] flex flex-1 justify-center items-center gap-[5vw] w-6/12"> 
-          <button className="border-none text-[2vw] w-full h-[6vw] outline-none bg-white text-black font-semibold rounded-lg">
-            Back
+
+        <ButtonLinks />
+
+        {/* TEMP Back to Login Button */}
+        <Link href="/home/login" className="mt-[6vw] w-6/12">
+          <button className="border-none text-[3vw] w-full h-[9vw] outline-none bg-white text-black font-semibold rounded-lg">
+            Back to Login
           </button>
-          <button className="border-none text-[3vw] w-full h-[6vw] outline-none bg-white text-black font-semibold rounded-lg">
-            Exit
-          </button>
-          <button className="border-none invisible text-[3vw] w-full h-[6vw] outline-none bg-white text-black font-semibold rounded-lg">
-            Confirm
-          </button>
-        </div>
+        </Link>
       </div>
     </div>
   );
