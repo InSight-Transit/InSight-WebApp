@@ -11,16 +11,19 @@ interface ButtonLinksProps {
    * If you want to hide the back button, set it to an empty string ('').
    */
   backHref?: string;  
+
    /**
    * Set exitHref to an empty string ('') to hide the exit button.
    * Otherwise, the exit button will always navigate to the homepage ('/').
    */
    exitHref?: string;
+
    /**
     * The Next button is hidden by default.
     * Provide a non-empty string to show it.
     */ 
   agreeHref?: string; 
+  
     /** Custom label for the Next button. Defaults to "Next" 
     * For example:
     *   <ButtonLinks
