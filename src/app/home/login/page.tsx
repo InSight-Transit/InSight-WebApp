@@ -33,6 +33,7 @@ export default function Welcome() {
           </Link>
         </div>
         <ButtonLinks
+        backHref="/home"
         />
       </div>
     </div>

@@ -1,11 +1,26 @@
+"use client";
 import NavHeader from "@/app/header";
 import ButtonLinks from "@/app/components/ButtonLinks";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { auth } from "../../../../../firebaseConfig"; // Ensure you import Firebase
+import { signOut } from "firebase/auth"; // Ensure you import Firebase
 
 export default function OptionsPage() {
+  const router = useRouter();
+
+  const handleLogout = async () => {
+    try {
+      await signOut(auth); // Sign out the user
+      router.push("/home/login"); // Redirect to login page
+    } catch (error) {
+      console.error("Error signing out:", error);
+    }
+  };
+
   return (
     <div className="bg-sky-700 min-h-screen w-full">
-      <NavHeader/>
+      <NavHeader hideLogout/>
       <div className="flex flex-1 justify-center items-center">
         <h1 className="text-white text-[8vw] font-bold p-[5vw]">InSight</h1>
       </div>
@@ -27,11 +42,9 @@ export default function OptionsPage() {
         <ButtonLinks />
 
         {/* TEMP Back to Login Button */}
-        <Link href="/home/login" className="mt-[6vw] w-6/12">
-          <button className="border-none text-[3vw] w-full h-[9vw] outline-none bg-white text-black font-semibold rounded-lg">
-            Back to Login
-          </button>
-        </Link>
+        <button onClick = {handleLogout} className="mt-[6vw] w-6/12 border-none text-[4.0vw] w-1/2 h-[9vw] outline-none bg-white text-black font-semibold rounded-lg">
+          Back to Login
+        </button>
       </div>
     </div>
   );

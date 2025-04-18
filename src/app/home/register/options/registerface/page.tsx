@@ -2,15 +2,18 @@
 import { useEffect, useRef, useState } from "react";
 import NavHeader from "@/app/header";
 import ButtonLinks from "@/app/components/ButtonLinks";
+import { useRouter } from "next/navigation";
 
 import { auth } from "../../../../../../firebaseConfig";
  // Ensure you import Firebase
 import authWrapper from "@/app/components/authWrapper";
+import { signOut } from "../../../../../../auth.js";
 
 // changed to function to apply auth (user required)
 function Welcome() {
   const videoRef = useRef<HTMLVideoElement>(null);
-    const canvasRef = useRef<HTMLCanvasElement>(null);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const router = useRouter();
   
     // Original:
     // const [_base64Image, setBase64Image] = useState('');
@@ -86,6 +89,9 @@ function Welcome() {
   
         const json = await response.json();
         console.log(json);
+
+        await signOut(auth); // Sign out the user after creating
+        router.push("/home/login");
       } catch (error) {
         if (error instanceof Error) {
           console.error(error.message);
@@ -113,7 +119,7 @@ function Welcome() {
 
   return (
     <div className="bg-sky-700 min-h-screen w-full">
-      <NavHeader/>
+      <NavHeader hideLogout/>
       <div className="flex flex-1 justify-center items-center">
         <h1 className="text-white text-[8vw] font-bold p-[5vw]">InSight</h1>
       </div>
