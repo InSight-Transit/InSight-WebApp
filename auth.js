@@ -38,7 +38,6 @@ export const signUp = async (email, password, userData) => {
     });
 
     console.log("User registered successfully:", user);
-    await signOut(auth); // Sign out the user after creating
     return user;
   } catch (error) {
     console.error("Error signing up:", error);
@@ -85,4 +84,4 @@ export const logOut = async () => {
 };
 
 // Exporting auth instance for use in other parts of the app
-export { auth };
+export { auth, signOut };

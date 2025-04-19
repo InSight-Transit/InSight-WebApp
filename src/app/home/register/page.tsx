@@ -28,7 +28,7 @@ export default function SignUp() {
 
   return (
     <div className="bg-sky-700 min-h-screen w-full">
-      <NavHeader />
+      <NavHeader/>
       <div className="flex flex-1 justify-center items-center">
         <h1 className="text-white text-[8vw] font-bold p-[5vw]">InSight</h1>
       </div>
