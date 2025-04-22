@@ -10,7 +10,7 @@ import { getFirestore, doc, getDoc } from "firebase/firestore";
 import { app } from "../../../../firebaseConfig";
 
 export default function UserProfile() {
-  const { user, logout, loading } = useAuth();
+  const { user, loading } = useAuth();
   const { balance } = useBalance();
   const router = useRouter();
   const [firstName, setFirstName] = useState("");
