@@ -28,12 +28,12 @@ export default function OptionsPage() {
         <h2 className="text-white text-[3vw] font-bold pb-[4vw]">Choose an option</h2>
       </div>
       <div className="flex flex-col items-center justify-center">
-        <div className="py-[13vw] flex flex-1 justify-center items-center gap-[5vw] w-6/12"> 
-          <button className="border-none text-[4.0vw] w-1/2 h-[11vw] outline-none bg-white text-black font-semibold rounded-lg">
+        <div className="pt-[4vw] flex flex-1 justify-center items-center gap-[5vw] w-6/12"> 
+          <button className="border-none text-[4.0vw] w-full h-full outline-none bg-white text-black font-semibold rounded-lg">
             Purchase Card
           </button>
           <Link className="w-full h-full" href={`/home/register/options/registerface/`}>
-            <button className="border-none text-[4.0vw] w-1/2 h-[11vw] outline-none bg-white text-black font-semibold rounded-lg">
+            <button className="border-none text-[4.0vw] w-full h-full outline-none bg-white text-black font-semibold rounded-lg">
               Register Face
             </button>
           </Link>
