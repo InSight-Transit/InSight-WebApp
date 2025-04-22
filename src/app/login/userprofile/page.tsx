@@ -1,23 +1,46 @@
 "use client";
 
-import Link from "next/link";
 import NavHeader from "../../header";
 import ButtonLinks from "@/app/components/ButtonLinks";
 import { useAuth } from "@/app/components/authContext";
 import { useBalance } from "@/app/components/balanceContext";
 import { useRouter } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { getFirestore, doc, getDoc } from "firebase/firestore";
+import { app } from "../../../../firebaseConfig";
 
 export default function UserProfile() {
   const { user, logout, loading } = useAuth();
   const { balance } = useBalance();
   const router = useRouter();
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
 
   useEffect(() => {
     if (!loading && !user) {
       router.push("/login"); // Redirect if not logged in
     }
   }, [user, loading, router]);
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      if (user) {
+        const db = getFirestore(app);
+        const userDoc = doc(db, "users", user.uid); // Assuming "users" is your Firestore collection
+        const docSnap = await getDoc(userDoc);
+
+        if (docSnap.exists()) {
+          const data = docSnap.data();
+          setFirstName(data.firstName || "");
+          setLastName(data.lastName || "");
+        } else {
+          console.error("No such document!");
+        }
+      }
+    };
+
+    fetchUserData();
+  }, [user]);
 
   if (loading || !user) {
     return <p className="text-white">Loading...</p>;
@@ -38,7 +61,7 @@ export default function UserProfile() {
 
         {/* Profile Card */}
         <div className="bg-white text-black rounded-lg shadow p-6 w-full max-w-md space-y-4 text-center">
-           {/* User name <div className="text-2xl font-semibold">{user.firstName}</div>*/}
+          <div className="text-2xl font-semibold">{firstName} {lastName}</div>
           <div className="text-md">Card ID: {user.uid}</div>
           <div className="text-md">Balance: ${balance.toFixed(2)}</div>
         </div>
