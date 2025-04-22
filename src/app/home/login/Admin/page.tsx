@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { signIn } from "../../../auth";
+import { signIn } from "../../../../../auth";
 
 // TEMP Login page to see if authentication is working
 // need to link to MongoDB and scan face instead for actual login
@@ -15,7 +15,7 @@ export default function Login() {
   const handleLogin = async () => {
     const result = await signIn(email, password);
     if (result) {
-      router.push("/login/userprofile");
+      router.push("/home");
     } else {
       setError("Invalid email or password");
     }
