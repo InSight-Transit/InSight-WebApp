@@ -8,6 +8,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { getFirestore, doc, getDoc } from "firebase/firestore";
 import { app } from "../../../../firebaseConfig";
+import Link from "next/link";
 
 export default function UserProfile() {
   const { user, loading } = useAuth();
@@ -68,8 +69,11 @@ export default function UserProfile() {
 
       {/* Action Buttons */}
       <div className="grid grid-cols-2 gap-4 mt-10 w-full max-w-md">
-        <button className="bg-white text-black font-semibold py-4 rounded-md shadow">Add Funds
-        </button>
+      <Link href="/addfunds" passHref>
+       <button className="w-full bg-white text-black font-semibold py-4 rounded-md shadow">
+      Add Funds
+       </button>
+      </Link>
         <button className="bg-white text-black font-semibold py-4 rounded-md shadow">View Transactions</button>
         <button className="bg-white text-black font-semibold py-4 rounded-md shadow">Update Info</button>
         <button className="bg-white text-black font-semibold py-4 rounded-md shadow">Deactivate Card</button>
