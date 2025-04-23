@@ -45,8 +45,7 @@ export default function UserProfile() {
 
       {/* Action Buttons */}
       <div className="grid grid-cols-2 gap-4 mt-10 w-full max-w-md">
-        <button className="bg-white text-black font-semibold py-4 rounded-md shadow">Add Funds
-        </button>
+        <button className="bg-white text-black font-semibold py-4 rounded-md shadow">Add Funds</button>
         <button className="bg-white text-black font-semibold py-4 rounded-md shadow">View Transactions</button>
         <button className="bg-white text-black font-semibold py-4 rounded-md shadow">Update Info</button>
         <button className="bg-white text-black font-semibold py-4 rounded-md shadow">Deactivate Card</button>
