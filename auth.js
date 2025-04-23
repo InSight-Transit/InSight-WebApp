@@ -1,6 +1,6 @@
 // auth.js
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged, setPersistence, browserLocalPersistence } from "firebase/auth";
-import { getFirestore, collection, doc, setDoc, getDoc, updateDoc, increment } from "firebase/firestore";
+import { getFirestore, doc, setDoc, getDoc, updateDoc, increment } from "firebase/firestore";
 import { app } from "./firebaseConfig";
 
 const auth = getAuth(app);
