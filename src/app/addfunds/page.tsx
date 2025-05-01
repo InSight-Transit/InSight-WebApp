@@ -82,9 +82,11 @@ function Home() {
     <div className="bg-sky-700 min-h-screen w-full">
       <NavHeader/>
       <div className="flex flex-1 justify-center items-center">
-        <h1 className="text-white text-[8vw] font-bold p-[5vw]">InSight</h1>
+        <h1 className="text-white text-[8vw] font-bold p-[3vw]">InSight</h1>
       </div>
-      <h1>Balance: ${balance}</h1>
+      <div className="flex flex-1 justify-center items-center">
+        <h2 className="text-white text-[4vw] font-bold p-[4vw]">Balance: ${balance}</h2>
+      </div>
       {message && (
         <div className="flex justify-center items-center mt-5">
           <div className="bg-white text-black p-4 rounded-lg text-center shadow-lg">
