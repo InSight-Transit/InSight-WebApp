@@ -9,8 +9,10 @@ import { useEffect, useState } from "react";
 import { getFirestore, doc, getDoc } from "firebase/firestore";
 import { app } from "../../../../firebaseConfig";
 import Link from "next/link";
+import { useTranslation } from "react-i18next";
 
 export default function UserProfile() {
+  const { t } = useTranslation("common");
   const { user, loading } = useAuth();
   const { balance } = useBalance();
   const router = useRouter();
@@ -55,7 +57,7 @@ export default function UserProfile() {
       </div>
 
       <div className="flex flex-1 justify-center items-center">
-        <h2 className="text-white text-[3vw] font-bold pb-[4vw]">Account Info</h2>
+        <h2 className="text-white text-[3vw] font-bold pb-[4vw]">{t("accountInfo")}</h2>
       </div>
 
       <div className="flex flex-col items-center justify-center">
@@ -63,20 +65,20 @@ export default function UserProfile() {
         {/* Profile Card */}
         <div className="bg-white text-black rounded-lg shadow p-6 w-full max-w-md space-y-4 text-center">
           <div className="text-2xl font-semibold">{firstName} {lastName}</div>
-          <div className="text-md">Card ID: {user.uid}</div>
-          <div className="text-md">Balance: ${balance.toFixed(2)}</div>
+          <div className="text-md">{t("accountCard")}{user.uid}</div>
+          <div className="text-md">{t("balance")}${balance.toFixed(2)}</div>
         </div>
 
       {/* Action Buttons */}
       <div className="grid grid-cols-2 gap-4 mt-10 w-full max-w-md">
       <Link href="/addfunds" passHref>
        <button className="w-full bg-white text-black font-semibold py-4 rounded-md shadow">
-      Add Funds
+       {t("addFunds")}
        </button>
       </Link>
-        <button className="bg-white text-black font-semibold py-4 rounded-md shadow">View Transactions</button>
-        <button className="bg-white text-black font-semibold py-4 rounded-md shadow">Update Info</button>
-        <button className="bg-white text-black font-semibold py-4 rounded-md shadow">Deactivate Card</button>
+        <button className="bg-white text-black font-semibold py-4 rounded-md shadow">{t("viewHistory")}</button>
+        <button className="bg-white text-black font-semibold py-4 rounded-md shadow">{t("updateInfo")}</button>
+        <button className="bg-white text-black font-semibold py-4 rounded-md shadow">{t("deactivate")}</button>
       </div>
 
         <ButtonLinks backHref="/home" />

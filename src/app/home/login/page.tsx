@@ -1,8 +1,12 @@
+"use client";
 import Link from "next/link";
 import NavHeader from "../../header";
 import ButtonLinks from "@/app/components/ButtonLinks";
+import { useTranslation } from "react-i18next";
 
 export default function Welcome() {
+  const { t } = useTranslation("common");
+
   return (
     <div className="bg-sky-700 min-h-screen w-full">
       <NavHeader/>
@@ -16,12 +20,12 @@ export default function Welcome() {
         <div className="pb-[4vw] flex flex-1 justify-center items-center gap-[5vw] w-6/12"> 
           <Link className="w-1/2 h-[11vw]" href={`/home/login/tap`}>
             <button className="border-none text-[4.0vw] w-full h-full outline-none bg-white text-black font-semibold rounded-lg">
-              Tap Card
+              {t("tapCard")}
             </button>
           </Link>
           <Link className="w-1/2 h-[11vw]" href={`/home/login/face`}>
             <button className="border-none text-[4.0vw] w-full h-full outline-none bg-white text-black font-semibold rounded-lg">
-              Scan Face
+              {t("scanFace")}
             </button>
           </Link>
         </div>

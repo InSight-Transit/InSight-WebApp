@@ -1,0 +1,65 @@
+{
+  "chooseLanguage": "Pumili ng Wika",
+  "english": "Ingles",
+  "spanish": "Espanyol",
+  "chinese": "Intsik",
+  "vietnamese": "Biyetnames",
+  "tagalog": "Tagalog",
+
+  "chooseOption": "Pumili ng opsyon",
+  "login": "Mag-login",
+  "logout": "Mag-logout",
+  "register": "Magrehistro",
+  "routeInfo": "Impormasyon sa Ruta",
+  "getSupport": "Humingi ng Tulong",
+
+  "back": "Bumalik",
+  "next": "Susunod",
+  "confirm": "Kumpirmahin",
+  "exit": "Lumabas",
+
+  "fields": "Pakiusap punan ang lahat ng mga patlang",
+  "firstName": "Pangalan",
+  "lastName": "Apelyido",
+  "email": "Email",
+  "phoneNumber": "Numero ng Telepono",
+  "password": "Password",
+
+  "review": "Pakiusap basahin ang mga Tuntunin at Kundisyon",
+  "acceptanceOfTerms": "Pagtanggap sa Mga Tuntunin",
+  "useOfApp": "Paggamit ng App",
+  "userAccounts": "Mga Account ng User",
+  "intellectualProperty": "Ari-arian ng Isip",
+  "limitationOfLiability": "Limitasyon ng Pananagutan",
+  "changesToTerms": "Pagbabago sa Mga Tuntunin",
+  "termination": "Pagwawakas",
+  "governingLaw": "Nauugnay na Batas",
+  "contactUs": "Makipag-ugnayan sa Amin",
+
+  "purchaseCard": "Bumili ng Card",
+  "registerFace": "Irehistro ang Mukha",
+
+  "removeCover": "Pakiusap alisin ang anumang takip sa mukha",
+
+  "tapCard": "Itap ang Card",
+  "scanFace": "I-scan ang Mukha",
+
+  "pleaseTap": "Pakiusap itap ang iyong bus card",
+
+  "pleaseTapCard": "Pakiusap itap o ipasok ang credit card o mobile payment",
+
+  "pleaseScan": "Pakiusap i-scan ang iyong mukha",
+
+  "successLogin": "Matagumpay na naka-login bilang user ",
+
+  "accountInfo": "Impormasyon ng Account",
+  "accountCard": "Card ID: ",
+  "balance": "Balanse: ",
+  "addFunds": "Magdagdag ng Pondo",
+  "viewHistory": "Tingnan ang Mga Transaksyon",
+  "updateInfo": "I-update ang Impormasyon",
+  "deactivate": "I-deactivate ang Card",
+
+  "reloadAmount": "Pumili ng halaga para i-reload",
+  "processing": "Pinoproseso..."
+}

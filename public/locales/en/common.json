@@ -1,0 +1,65 @@
+{
+  "chooseLanguage": "Choose Language",
+  "english": "English",
+  "spanish": "Español",
+  "chinese": "中文",
+  "vietnamese": "tiếng việt",
+  "tagalog": "Tagalog",
+
+  "chooseOption": "Choose an option",
+  "login": "Login",
+  "logout": "Logout",
+  "register": "Register",
+  "routeInfo": "Route Information",
+  "getSupport": "Get Support",
+
+  "back": "Back",
+  "next": "Next",
+  "confirm": "Confirm",
+  "exit": "Exit",
+
+  "fields": "Please fill all the fields",
+  "firstName": "First Name",
+  "lastName": "Last Name",
+  "email": "Email",
+  "phoneNumber": "Phone Number",
+  "password": "Password",
+
+  "review": "Please review the Terms & Conditions",
+  "acceptanceOfTerms": "Acceptance of Terms",
+  "useOfApp": "Use of the App",
+  "userAccounts": "User Accounts",
+  "intellectualProperty": "Intellectual Property",
+  "limitationOfLiability": "Limitation of Liability",
+  "changesToTerms": "Changes to Terms",
+  "termination": "Termination",
+  "governingLaw": "Governing Law",
+  "contactUs": "Contact Us",
+
+  "purchaseCard": "Purchase Card",
+  "registerFace": "Register Face",
+
+  "removeCover": "Please remove facial coverings",
+
+  "tapCard": "Tap Card",
+  "scanFace": "Scan Face",
+
+  "pleaseTap": "Please tap your bus card",
+
+  "pleaseTapCard": "Please insert or tap your credit card or phone payment",
+
+  "pleaseScan": "Please scan your face",
+
+  "successLogin": "Successfully logged in as user ",
+
+  "accountInfo": "Account Info",
+  "accountCard": "Card ID: ",
+  "balance": "Balance: ",
+  "addFunds": "Add Funds",
+  "viewHistory": "View Transactions",
+  "updateInfo": "Update Info",
+  "deactivate": "Deactivate Card",
+
+  "reloadAmount": "Choose an amount to reload",
+  "processing": "Processing..."
+  }

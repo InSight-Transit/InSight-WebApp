@@ -4,8 +4,10 @@
 import { Suspense } from "react";
 import NavHeader from "@/app/header";
 import { useSearchParams } from "next/navigation";
+import { useTranslation } from "react-i18next";
 
 function SuccessPage() {
+  const { t } = useTranslation("common");
   const searchParams = useSearchParams();
   const accountId = searchParams.get("accountId");
 
@@ -16,7 +18,7 @@ function SuccessPage() {
         <h1 className="text-white text-[8vw] font-bold p-[5vw]">InSight</h1>
       </div>
       <div className="flex flex-1 justify-center items-center">
-        <h2 className="text-white text-[3vw] font-bold pb-[4vw]">Successfully logged in as user {accountId}!</h2>
+        <h2 className="text-white text-[3vw] font-bold pb-[4vw]">{t("successLogin")} {accountId}!</h2>
       </div>
     </div>
   );

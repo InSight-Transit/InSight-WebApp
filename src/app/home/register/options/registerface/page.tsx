@@ -8,9 +8,11 @@ import { auth } from "../../../../../../firebaseConfig";
  // Ensure you import Firebase
 import authWrapper from "@/app/components/authWrapper";
 import { signOut } from "../../../../../../auth.js";
+import { useTranslation } from "react-i18next";
 
 // changed to function to apply auth (user required)
 function Welcome() {
+  const { t } = useTranslation("common");
   const videoRef = useRef<HTMLVideoElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const router = useRouter();
@@ -124,7 +126,7 @@ function Welcome() {
         <h1 className="text-white text-[8vw] font-bold p-[5vw]">InSight</h1>
       </div>
       <div className="flex flex-1 justify-center items-center">
-        <h2 className="text-white text-[3vw] font-bold pb-[4vw]">Please remove facial coverings</h2>
+        <h2 className="text-white text-[3vw] font-bold pb-[4vw]">{t("removeCover")}</h2>
       </div>
       <div className="flex flex-col items-center justify-center flex-grow">
         <div className="flex flex-col items-center">

@@ -3,8 +3,10 @@ import { useEffect, useRef, useState } from "react";
 import ButtonLinks from "@/app/components/ButtonLinks";
 import NavHeader from "@/app/header";
 import { useRouter } from "next/navigation";
+import { useTranslation } from "react-i18next";
 
 export default function Welcome() {
+  const { t } = useTranslation("common");
   const videoRef = useRef<HTMLVideoElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const router = useRouter();
@@ -109,7 +111,7 @@ export default function Welcome() {
         <h1 className="text-white text-[8vw] font-bold p-[5vw]">InSight</h1>
       </div>
       <div className="flex flex-1 justify-center items-center">
-        <h2 className="text-white text-[3vw] font-bold pb-[4vw]">Please scan your face</h2>
+        <h2 className="text-white text-[3vw] font-bold pb-[4vw]">{t("pleaseScan")}</h2>
       </div>
       <div className="flex flex-col items-center justify-center flex-grow">
         <div className="flex flex-col items-center">

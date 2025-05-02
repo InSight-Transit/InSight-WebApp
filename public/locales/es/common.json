@@ -1,0 +1,65 @@
+{
+  "chooseLanguage": "Elige idioma",
+  "english": "Inglés",
+  "spanish": "Español",
+  "chinese": "Chino",
+  "vietnamese": "Vietnamita",
+  "tagalog": "Tagalo",
+
+  "chooseOption": "Elige una opción",
+  "login": "Iniciar sesión",
+  "logout": "Cerrar sesión",
+  "register": "Registrarse",
+  "routeInfo": "Información de rutas",
+  "getSupport": "Obtener soporte",
+
+  "back": "Atrás",
+  "next": "Siguiente",
+  "confirm": "Confirmar",
+  "exit": "Salir",
+
+  "fields": "Por favor completa todos los campos",
+  "firstName": "Nombre",
+  "lastName": "Apellido",
+  "email": "Correo electrónico",
+  "phoneNumber": "Número de teléfono",
+  "password": "Contraseña",
+
+  "review": "Por favor revisa los Términos y Condiciones",
+  "acceptanceOfTerms": "Aceptación de los Términos",
+  "useOfApp": "Uso de la aplicación",
+  "userAccounts": "Cuentas de usuario",
+  "intellectualProperty": "Propiedad intelectual",
+  "limitationOfLiability": "Limitación de responsabilidad",
+  "changesToTerms": "Cambios a los Términos",
+  "termination": "Terminación",
+  "governingLaw": "Legislación aplicable",
+  "contactUs": "Contáctanos",
+
+  "purchaseCard": "Comprar tarjeta",
+  "registerFace": "Registrar rostro",
+
+  "removeCover": "Por favor quítate cualquier cobertura facial",
+
+  "tapCard": "Toca la tarjeta",
+  "scanFace": "Escanea tu rostro",
+
+  "pleaseTap": "Por favor toca tu tarjeta de autobús",
+
+  "pleaseTapCard": "Por favor inserta o toca tu tarjeta de crédito o método de pago móvil",
+
+  "pleaseScan": "Por favor escanea tu rostro",
+
+  "successLogin": "Sesión iniciada exitosamente como usuario ",
+
+  "accountInfo": "Información de la cuenta",
+  "accountCard": "ID de tarjeta: ",
+  "balance": "Saldo: ",
+  "addFunds": "Agregar fondos",
+  "viewHistory": "Ver transacciones",
+  "updateInfo": "Actualizar información",
+  "deactivate": "Desactivar tarjeta",
+
+  "reloadAmount": "Elige una cantidad para recargar",
+  "processing": "Procesando..."
+}

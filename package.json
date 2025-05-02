@@ -14,9 +14,12 @@
     "@stripe/stripe-js": "^6.1.0",
     "firebase": "^11.3.0",
     "firebase-admin": "^13.2.0",
+    "i18next": "^25.0.2",
     "next": "^15.3.0",
+    "next-i18next": "^15.4.2",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "react-i18next": "^15.5.1",
     "stripe": "^17.7.0"
   },
   "devDependencies": {

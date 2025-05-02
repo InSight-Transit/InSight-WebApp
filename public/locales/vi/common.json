@@ -1,0 +1,65 @@
+{
+  "chooseLanguage": "Chọn ngôn ngữ",
+  "english": "Tiếng Anh",
+  "spanish": "Tiếng Tây Ban Nha",
+  "chinese": "Tiếng Trung",
+  "vietnamese": "tiếng việt",
+  "tagalog": "Tiếng Tagalog",
+
+  "chooseOption": "Chọn một tùy chọn",
+  "login": "Đăng nhập",
+  "logout": "Đăng xuất",
+  "register": "Đăng ký",
+  "routeInfo": "Thông tin tuyến",
+  "getSupport": "Nhận hỗ trợ",
+
+  "back": "Quay lại",
+  "next": "Tiếp theo",
+  "confirm": "Xác nhận",
+  "exit": "Thoát",
+
+  "fields": "Vui lòng điền tất cả các trường",
+  "firstName": "Tên",
+  "lastName": "Họ",
+  "email": "Email",
+  "phoneNumber": "Số điện thoại",
+  "password": "Mật khẩu",
+
+  "review": "Vui lòng xem lại Điều khoản và Điều kiện",
+  "acceptanceOfTerms": "Chấp nhận điều khoản",
+  "useOfApp": "Sử dụng ứng dụng",
+  "userAccounts": "Tài khoản người dùng",
+  "intellectualProperty": "Sở hữu trí tuệ",
+  "limitationOfLiability": "Giới hạn trách nhiệm",
+  "changesToTerms": "Thay đổi điều khoản",
+  "termination": "Chấm dứt",
+  "governingLaw": "Luật điều chỉnh",
+  "contactUs": "Liên hệ chúng tôi",
+
+  "purchaseCard": "Mua thẻ",
+  "registerFace": "Đăng ký khuôn mặt",
+
+  "removeCover": "Vui lòng bỏ vật che mặt",
+
+  "tapCard": "Chạm thẻ",
+  "scanFace": "Quét khuôn mặt",
+
+  "pleaseTap": "Vui lòng chạm thẻ xe buýt của bạn",
+
+  "pleaseTapCard": "Vui lòng chạm hoặc quét thẻ tín dụng hoặc điện thoại thanh toán",
+
+  "pleaseScan": "Vui lòng quét khuôn mặt của bạn",
+
+  "successLogin": "Đăng nhập thành công với tư cách người dùng ",
+
+  "accountInfo": "Thông tin tài khoản",
+  "accountCard": "ID thẻ: ",
+  "balance": "Số dư: ",
+  "addFunds": "Nạp tiền",
+  "viewHistory": "Xem giao dịch",
+  "updateInfo": "Cập nhật thông tin",
+  "deactivate": "Hủy kích hoạt thẻ",
+
+  "reloadAmount": "Chọn số tiền để nạp",
+  "processing": "Đang xử lý..."
+}
