@@ -69,8 +69,6 @@ export default function Welcome() {
       const json = await response.json();
       console.log(json['Account ID']);
       router.push(`/home/login/face/success?accountId=${json['Account ID']}`);
-      
-
     } catch (error) {
       if (error instanceof Error) {
         console.error(error.message);
@@ -95,10 +93,12 @@ export default function Welcome() {
       getVideo();
     }
 
+    // Automatically capture and verify every 3 seconds
     const interval = setInterval(() => {
       captureImage();
-    }, 3000);
+    }, 5000);
 
+    // Cleanup interval on component unmount
     return () => clearInterval(interval);
   }, []);
 
@@ -113,16 +113,15 @@ export default function Welcome() {
       </div>
       <div className="flex flex-col items-center justify-center flex-grow">
         <div className="flex flex-col items-center">
-            <div className="bg-sky-700 p-6 rounded-lg">
+          <div className="bg-sky-700 p-6 rounded-lg">
             <video
               ref={videoRef}
               style={{ width: "100%", maxWidth: "500px", transform: "scaleX(-1)" }}
               autoPlay
             />
-            </div>
+          </div>
         </div>
         <ButtonLinks />
-        <button onClick={() => captureImage()}> Capture </button>
         <canvas ref={canvasRef} style={{ display: 'none' }} />
       </div>
     </div>
