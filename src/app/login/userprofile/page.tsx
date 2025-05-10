@@ -76,7 +76,11 @@ export default function UserProfile() {
        {t("addFunds")}
        </button>
       </Link>
-        <button className="bg-white text-black font-semibold py-4 rounded-md shadow">{t("viewHistory")}</button>
+      <Link href="/login/userprofile/viewTransaction" passHref>
+        <button className="w-full bg-white text-black font-semibold py-4 rounded-md shadow">
+          {t("viewHistory")}
+      </button>
+      </Link>
         <button className="bg-white text-black font-semibold py-4 rounded-md shadow">{t("updateInfo")}</button>
         <button className="bg-white text-black font-semibold py-4 rounded-md shadow">{t("deactivate")}</button>
       </div>
