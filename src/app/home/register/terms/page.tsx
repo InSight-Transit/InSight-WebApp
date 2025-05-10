@@ -5,7 +5,7 @@ import ButtonLinks from "@/app/components/ButtonLinks";
 import { useTranslation } from "react-i18next";
 
 
-export default function registration() {
+export default function Registration() {
   const { t } = useTranslation("common");
 
   return (
@@ -30,7 +30,7 @@ export default function registration() {
       </p>
       <h3 className="font-bold mb-2">2. {t("useOfApp")}</h3>
       <p className="mb-4">
-        You agree to use the app only for lawful purposes and in accordance with these terms. You must not use the app in any way that could damage, disable, or impair the app or interfere with other users' access.
+        You agree to use the app only for lawful purposes and in accordance with these terms. You must not use the app in any way that could damage, disable, or impair the app or interfere with other users&apos; access.
       </p>
       <h3 className="font-bold mb-2">3. {t("userAccounts")}</h3>
       <p className="mb-4">
@@ -42,7 +42,7 @@ export default function registration() {
       </p>
       <h3 className="font-bold mb-2">5. {t("limitationOfLiability")}</h3>
       <p className="mb-4">
-        InSight is not responsible for any damages or losses resulting from your use of the app. The app is provided "as is" without any warranties of any kind.
+        InSight is not responsible for any damages or losses resulting from your use of the app. The app is provided &quot;as is&quot; without any warranties of any kind.
       </p>
       <h3 className="font-bold mb-2">6. {t("changesToTerms")}</h3>
       <p className="mb-4">

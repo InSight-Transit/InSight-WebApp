@@ -1,6 +1,5 @@
 "use client";
 import NavHeader from "./header";
-import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useTranslation } from "react-i18next";
 import { useLanguage } from "@/app/components/LanguageContext";
