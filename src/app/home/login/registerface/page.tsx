@@ -6,6 +6,7 @@ import ButtonLinks from "@/app/components/ButtonLinks";
 import { auth } from "../../../../../firebaseConfig"; // Ensure you import Firebase
 import authWrapper from "@/app/components/authWrapper";
 import { useTranslation } from "react-i18next";
+import router from "next/router";
 
 function Welcome() {
   const { t } = useTranslation("common");
@@ -44,6 +45,11 @@ function Welcome() {
 
       const json = await response.json();
       console.log(json);
+
+      // Redirect to user profile page
+      setTimeout(() => {
+      router.push("/login/userprofile");
+      }, 5000);
     } catch (error) {
       if (error instanceof Error) {
         console.error(error.message);
