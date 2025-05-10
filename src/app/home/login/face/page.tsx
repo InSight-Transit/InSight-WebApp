@@ -3,13 +3,27 @@ import { useEffect, useRef, useState } from "react";
 import ButtonLinks from "@/app/components/ButtonLinks";
 import NavHeader from "@/app/header";
 import { useRouter } from "next/navigation";
+import { useTranslation } from "react-i18next";
+import { useBalance } from "@/app/components/balanceContext";
 
 export default function Welcome() {
+  const { t } = useTranslation("common");
+  const { balance, updateBalanceInFirestore } = useBalance(); // Access balance context
   const videoRef = useRef<HTMLVideoElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const router = useRouter();
 
   const setBase64Image = useState('')[1];
+
+  // subtract balance function; TODO: add insufficient balance check/notification later
+  const subtractBalance = async (amount: number) => {
+    const newBalance = balance - amount;
+    if (newBalance < 0) {
+      console.error("Insufficient balance.");
+      return;
+    }
+    await updateBalanceInFirestore(newBalance);
+  };
 
   const captureImage = () => {
     const video = videoRef.current;
@@ -68,9 +82,9 @@ export default function Welcome() {
 
       const json = await response.json();
       console.log(json['Account ID']);
+      // subtract $2.50 from balance
+      await subtractBalance(2.5);
       router.push(`/home/login/face/success?accountId=${json['Account ID']}`);
-      
-
     } catch (error) {
       if (error instanceof Error) {
         console.error(error.message);
@@ -95,10 +109,12 @@ export default function Welcome() {
       getVideo();
     }
 
+    // Automatically capture and verify every 3 seconds
     const interval = setInterval(() => {
       captureImage();
-    }, 3000);
+    }, 5000);
 
+    // Cleanup interval on component unmount
     return () => clearInterval(interval);
   }, []);
 
@@ -109,20 +125,19 @@ export default function Welcome() {
         <h1 className="text-white text-[8vw] font-bold p-[5vw]">InSight</h1>
       </div>
       <div className="flex flex-1 justify-center items-center">
-        <h2 className="text-white text-[3vw] font-bold pb-[4vw]">Please scan your face</h2>
+        <h2 className="text-white text-[3vw] font-bold pb-[4vw]">{t("pleaseScan")}</h2>
       </div>
       <div className="flex flex-col items-center justify-center flex-grow">
         <div className="flex flex-col items-center">
-            <div className="bg-sky-700 p-6 rounded-lg">
+          <div className="bg-sky-700 p-6 rounded-lg">
             <video
               ref={videoRef}
               style={{ width: "100%", maxWidth: "500px", transform: "scaleX(-1)" }}
               autoPlay
             />
-            </div>
+          </div>
         </div>
         <ButtonLinks />
-        <button onClick={() => captureImage()}> Capture </button>
         <canvas ref={canvasRef} style={{ display: 'none' }} />
       </div>
     </div>

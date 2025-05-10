@@ -5,14 +5,12 @@ import { useRouter, useSearchParams } from "next/navigation";
 import NavHeader from "../header";
 import ButtonLinks from "@/app/components/ButtonLinks";
 import { useBalance } from "../components/balanceContext"
-import { useAuth } from "../components/authContext";  // Import AuthContext
-//import { getFirestore } from "firebase/firestore";
+import { useAuth } from "../components/authContext";
 import authWrapper from "@/app/components/authWrapper"
+import { useTranslation } from "react-i18next";
 
-//const db = getFirestore();
-
-// encapsulated by authWrapper
 function Home() {
+  const { t } = useTranslation("common");
   const [amount, setAmount] = useState<number | "">("");
   const [loading, setLoading] = useState(false);
   const { balance, refreshBalance } = useBalance();
@@ -82,9 +80,11 @@ function Home() {
     <div className="bg-sky-700 min-h-screen w-full">
       <NavHeader/>
       <div className="flex flex-1 justify-center items-center">
-        <h1 className="text-white text-[8vw] font-bold p-[5vw]">InSight</h1>
+        <h1 className="text-white text-[8vw] font-bold p-[3vw]">InSight</h1>
       </div>
-      <h1>Balance: ${balance}</h1>
+      <div className="flex flex-1 justify-center items-center">
+        <h2 className="text-white text-[4vw] font-bold p-[4vw]">{t("balance")}${balance}</h2>
+      </div>
       {message && (
         <div className="flex justify-center items-center mt-5">
           <div className="bg-white text-black p-4 rounded-lg text-center shadow-lg">
@@ -93,7 +93,7 @@ function Home() {
         </div>
       )}
       <div className="flex flex-1 justify-center items-center">
-        <h2 className="text-white text-[3vw] font-bold pb-[4vw]">Choose an amount to reload</h2>
+        <h2 className="text-white text-[3vw] font-bold pb-[4vw]">{t("reloadAmount")}</h2>
       </div>
       <div className="flex flex-col items-center justify-center">
         <div className="pb-[4vw] flex flex-1 justify-center items-center gap-[5vw] w-6/12"> 
@@ -132,7 +132,7 @@ function Home() {
             disabled={loading}
             className="border-none text-[3vw] w-full h-[6vw] outline-none bg-white text-black font-semibold rounded-lg"
           >
-            {loading ? "Processing..." : "Confirm"}
+            {loading ? t("processing") : t("confirm")}
           </button>
         </div>
         <ButtonLinks/>

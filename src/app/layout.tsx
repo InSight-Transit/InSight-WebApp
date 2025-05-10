@@ -1,10 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
-
-// Context imports for balance and authentication (user persistent data)
-import { AuthProvider } from "./components/authContext";
-import { BalanceProvider } from "./components/balanceContext";
+import RootLayoutClient from "./components/RootLayoutClient";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -32,11 +29,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <AuthProvider>
-          <BalanceProvider>
-            {children}
-          </BalanceProvider>
-        </AuthProvider>
+      <RootLayoutClient>{children}</RootLayoutClient>
       </body>
     </html>
   );
