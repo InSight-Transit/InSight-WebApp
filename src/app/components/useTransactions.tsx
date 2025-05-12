@@ -1,6 +1,4 @@
 import { useEffect, useState } from "react";
-import { getFirestore } from "firebase/firestore";
-import { app } from "../../../firebaseConfig";
 import { useAuth } from "./authContext";
 
 // Define the structure of a transaction
