@@ -1,6 +1,5 @@
 "use client";
 
-import React, { useEffect } from "react";
 import { useTransactions } from "../../../components/useTransactions";
 import NavHeader from "@/app/header";
 import ButtonLinks from "@/app/components/ButtonLinks";

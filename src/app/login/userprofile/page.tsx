@@ -70,7 +70,7 @@ export default function UserProfile() {
         // 4. Redirect AFTER sign out (not inside useEffect)
         router.push("/"); // Go to home page
       } catch (error) {
-        console.error("Error during deactivation:", (error as any).message || error);
+        console.error("Error during deactivation:", error);
       }
     };
 

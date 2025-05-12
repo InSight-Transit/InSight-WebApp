@@ -4,26 +4,14 @@ import ButtonLinks from "@/app/components/ButtonLinks";
 import NavHeader from "@/app/header";
 import { useRouter } from "next/navigation";
 import { useTranslation } from "react-i18next";
-import { useBalance } from "@/app/components/balanceContext";
 
 export default function Welcome() {
   const { t } = useTranslation("common");
-  const { balance, updateBalanceInFirestore } = useBalance(); // Access balance context
   const videoRef = useRef<HTMLVideoElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const router = useRouter();
 
   const setBase64Image = useState('')[1];
-
-  // subtract balance function; TODO: add insufficient balance check/notification later
-  const subtractBalance = async (amount: number) => {
-    const newBalance = balance - amount;
-    if (newBalance < 0) {
-      console.error("Insufficient balance.");
-      return;
-    }
-    await updateBalanceInFirestore(newBalance);
-  };
 
   const captureImage = () => {
     const video = videoRef.current;
@@ -82,8 +70,6 @@ export default function Welcome() {
 
       const json = await response.json();
       console.log(json['Account ID']);
-      // subtract $2.50 from balance
-      await subtractBalance(2.5);
       router.push(`/home/login/face/success?accountId=${json['Account ID']}`);
     } catch (error) {
       if (error instanceof Error) {
