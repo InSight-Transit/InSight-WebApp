@@ -1,13 +1,20 @@
 import { useEffect, useState } from "react";
-import { getFirestore, collection, query, orderBy, onSnapshot } from "firebase/firestore";
+import { getFirestore } from "firebase/firestore";
 import { app } from "../../../firebaseConfig";
 import { useAuth } from "./authContext";
 
-const db = getFirestore(app);
+// Define the structure of a transaction
+interface Transaction {
+  id: string;
+  description: string;
+  amount: number;
+  status: string;
+  created: number; // Timestamp in seconds
+}
 
 export function useTransactions() {
   const { user } = useAuth();
-  const [transactions, setTransactions] = useState<any[]>([]);
+  const [transactions, setTransactions] = useState<Transaction[]>([]);
 
   useEffect(() => {
     if (!user) return;
