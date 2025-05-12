@@ -108,9 +108,13 @@ export default function UserProfile() {
       <Link href="/login/userprofile/viewTransaction" passHref>
         <button className="w-full bg-white text-black font-semibold py-4 rounded-md shadow">
           {t("viewHistory")}
-      </button>
+        </button>
       </Link>
-        <button className="bg-white text-black font-semibold py-4 rounded-md shadow">{t("updateInfo")}</button>
+      <Link href="/login/userprofile/updateFace" passHref>
+        <button className="w-full bg-white text-black font-semibold py-4 rounded-md shadow">
+          {t("updateFace")}
+        </button>
+      </Link>
         <button 
           onClick={() => setShowConfirm(true)}
           className="bg-white text-black font-semibold py-4 rounded-md shadow"
