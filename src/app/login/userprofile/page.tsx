@@ -6,10 +6,11 @@ import { useAuth } from "@/app/components/authContext";
 import { useBalance } from "@/app/components/balanceContext";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { getFirestore, doc, getDoc } from "firebase/firestore";
+import { getFirestore, doc, getDoc, deleteDoc } from "firebase/firestore";
 import { app } from "../../../../firebaseConfig";
 import Link from "next/link";
 import { useTranslation } from "react-i18next";
+import { getAuth, signOut } from "firebase/auth";
 
 export default function UserProfile() {
   const { t } = useTranslation("common");
@@ -18,12 +19,13 @@ export default function UserProfile() {
   const router = useRouter();
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
+  const [showConfirm, setShowConfirm] = useState(false);
 
   useEffect(() => {
-    if (!loading && !user) {
-      router.push("/login"); // Redirect if not logged in
+    if (!loading && !user && !showConfirm) {
+      router.push("/login");
     }
-  }, [user, loading, router]);
+  }, [user, loading, showConfirm, router]);
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -44,6 +46,29 @@ export default function UserProfile() {
 
     fetchUserData();
   }, [user]);
+
+    const handleDeactivate = async () => {
+      if (!user) return;
+
+      try {
+        const db = getFirestore(app);
+        const userRef = doc(db, "users", user.uid);
+
+        // 1. Delete Firestore user doc
+        await deleteDoc(userRef);
+        console.log("Firestore user deleted");
+
+        // 2. Sign the user out
+        const auth = getAuth(app);
+        await signOut(auth);
+        console.log("User signed out");
+
+        // 3. Redirect AFTER sign out (not inside useEffect)
+        router.push("/"); // Go to home page
+      } catch (error) {
+        console.error("Error during deactivation:", (error as any).message || error);
+      }
+    };
 
   if (loading || !user) {
     return <p className="text-white">Loading...</p>;
@@ -82,11 +107,41 @@ export default function UserProfile() {
       </button>
       </Link>
         <button className="bg-white text-black font-semibold py-4 rounded-md shadow">{t("updateInfo")}</button>
-        <button className="bg-white text-black font-semibold py-4 rounded-md shadow">{t("deactivate")}</button>
+        <button 
+          onClick={() => setShowConfirm(true)}
+          className="bg-white text-black font-semibold py-4 rounded-md shadow"
+          >
+           {t("deactivate")}
+
+        </button>
       </div>
 
-        <ButtonLinks backHref="/home" />
-      </div>
-    </div>
+      <ButtonLinks backHref="/home" />
+
+      {/* Deactivation Confirmation Modal */}     
+      {showConfirm && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white p-6 rounded-xl shadow-lg text-center max-w-md w-[80%]">
+            <h2 className="text-xl font-bold mb-4">Are you sure?</h2>
+            <p className="mb-6">This will permanently delete your account.</p>
+            <div className="flex justify-around">
+              <button
+                className="bg-red-500 text-white px-4 py-2 rounded"
+                onClick={handleDeactivate}
+              >
+                Confirm
+              </button>
+              <button
+                className="bg-gray-300 text-black px-4 py-2 rounded"
+                onClick={() => setShowConfirm(false)}
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+    </div> 
+  </div>  
   );
 }
