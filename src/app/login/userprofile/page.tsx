@@ -58,12 +58,16 @@ export default function UserProfile() {
         await deleteDoc(userRef);
         console.log("Firestore user deleted");
 
-        // 2. Sign the user out
+        // 2. Delete user from Firebase Auth
         const auth = getAuth(app);
+        await user.delete(); // Deletes the user from Firebase Authentication
+        console.log("User deleted from Firebase Authentication");
+
+        // 3. Sign the user out
         await signOut(auth);
         console.log("User signed out");
 
-        // 3. Redirect AFTER sign out (not inside useEffect)
+        // 4. Redirect AFTER sign out (not inside useEffect)
         router.push("/"); // Go to home page
       } catch (error) {
         console.error("Error during deactivation:", (error as any).message || error);
