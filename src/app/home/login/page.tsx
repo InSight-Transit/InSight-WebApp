@@ -3,9 +3,21 @@ import Link from "next/link";
 import NavHeader from "../../header";
 import ButtonLinks from "@/app/components/ButtonLinks";
 import { useTranslation } from "react-i18next";
+import { useAuth } from "@/app/components/authContext";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 export default function Welcome() {
   const { t } = useTranslation("common");
+  const { user } = useAuth(); // Get the authenticated user
+  const router = useRouter();
+
+  useEffect(() => {
+    if (user) {
+      // Redirect to user profile if logged in
+      router.push("/login/userprofile");
+    }
+  }, [user, router]);
 
   return (
     <div className="bg-sky-700 min-h-screen w-full">

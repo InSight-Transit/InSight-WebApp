@@ -29,7 +29,10 @@ export async function POST(req) {
       ],
       success_url: `${process.env.NEXT_PUBLIC_BASE_URL}/addfunds?success=true`,
       cancel_url: `${process.env.NEXT_PUBLIC_BASE_URL}/addfunds?canceled=true`,
-      metadata: { userId }
+      metadata: { userId },
+      payment_intent_data: {
+      metadata: { userId }, // Explicitly set metadata for the Payment Intent
+      }
     });
 
     return new Response(JSON.stringify({ url: session.url }), { status: 200 });

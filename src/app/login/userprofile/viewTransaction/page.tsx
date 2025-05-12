@@ -8,15 +8,6 @@ import ButtonLinks from "@/app/components/ButtonLinks";
 export default function TransactionHistory() {
   const transactions = useTransactions();
 
-  useEffect(() => {
-    const buttons = document.querySelectorAll("button");
-    buttons.forEach((btn) => {
-      if (btn.textContent?.trim() === "Exit") {
-        btn.style.display = "none";
-        btn.parentElement?.classList.add("justify-center");
-      }
-    });
-  }, []);
 
   return (
     <div className="bg-sky-700 min-h-screen w-full">
@@ -33,9 +24,9 @@ export default function TransactionHistory() {
               {transactions.map((tx) => (
                 <li key={tx.id} className="border-b pb-2 text-[3.5vw]">
                   <div className="font-semibold">{tx.description}</div>
-                  <div>${tx.amount} – {tx.type}</div>
+                  <div>${(tx.amount / 100).toFixed(2)} – {tx.status}</div>
                   <div className="text-sm text-gray-500">
-                    {new Date(tx.timestamp?.toDate?.() || tx.timestamp).toLocaleString()}
+                    {new Date(tx.created * 1000).toLocaleString()}
                   </div>
                 </li>
               ))}

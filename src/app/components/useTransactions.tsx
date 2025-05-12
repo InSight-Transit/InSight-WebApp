@@ -12,18 +12,26 @@ export function useTransactions() {
   useEffect(() => {
     if (!user) return;
 
-    const transactionsRef = collection(db, "users", user.uid, "transactions");
-    const q = query(transactionsRef, orderBy("timestamp", "desc"));
+    const fetchTransactions = async () => {
+      try {
+        const response = await fetch("/api/transactions", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ userId: user.uid }),
+        });
 
-    const unsubscribe = onSnapshot(q, (snapshot) => {
-      const data = snapshot.docs.map((doc) => ({
-        id: doc.id,
-        ...doc.data(),
-      }));
-      setTransactions(data);
-    });
+        if (!response.ok) {
+          throw new Error("Failed to fetch transactions");
+        }
 
-    return () => unsubscribe();
+        const data = await response.json();
+        setTransactions(data);
+      } catch (error) {
+        console.error("Error fetching transactions:", error);
+      }
+    };
+
+    fetchTransactions();
   }, [user]);
 
   return transactions;
