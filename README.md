@@ -31,7 +31,16 @@ Ensure usability across different transport modes, such as subway, buses, and tr
 
 ## Demo:
 
-First, run the development server:
+First clone the repository to the server.
+
+Then, run
+```bash
+npm i
+```
+to install dependencies.
+
+
+Finally, run the development server:
 
 ```bash
 npm run dev
