@@ -11,8 +11,9 @@ import { app } from "../../../../firebaseConfig";
 import Link from "next/link";
 import { useTranslation } from "react-i18next";
 import { getAuth, signOut } from "firebase/auth";
+import authWrapper from "@/app/components/authWrapper";
 
-export default function UserProfile() {
+function UserProfile() {
   const { t } = useTranslation("common");
   const { user, loading } = useAuth();
   const { balance } = useBalance();
@@ -153,3 +154,5 @@ export default function UserProfile() {
   </div>  
   );
 }
+
+export default authWrapper(UserProfile);
