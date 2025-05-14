@@ -1,9 +1,9 @@
-This is a repository for
-# InSight: Alternative Biometric Payment Integration in Public Transport Systems
+#### This is a repository for San Jose State University Spring 2025 Senior Projet Group U12
+
+# InSight: Alternative Biometric Payment Integration in Public Transport Systems (Kiosk)
 
 
-
-## Getting Started
+### Demo:
 
 First, run the development server:
 
