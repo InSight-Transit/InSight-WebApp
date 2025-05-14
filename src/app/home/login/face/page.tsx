@@ -47,6 +47,8 @@ export default function Welcome() {
 
   async function verify(base64Img: string) {
     const url = "http://127.0.0.1:8000/api/search";
+    const generateTokenUrl = "http://127.0.0.1:8000/api/generate-token"; // API to generate custom token
+
 
     try {
       const byteCharacters = atob(base64Img.split(',')[1]);
@@ -77,16 +79,18 @@ export default function Welcome() {
     }
 
     // Fetch the custom token from your backend
-    const tokenResponse = await fetch("http://127.0.0.1:8000/api/generate-token", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ accountId }),
+    const tokenResponse = await fetch(generateTokenUrl, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ accountId }),
     });
 
     if (!tokenResponse.ok) {
       throw new Error("Failed to fetch custom token from backend.");
     }
+
     const { customToken } = await tokenResponse.json();
+    console.log("Custom token generated:", customToken);
 
     // Log in the user using the custom token
     const { getAuth, signInWithCustomToken } = await import("firebase/auth");

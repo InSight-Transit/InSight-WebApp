@@ -33,6 +33,9 @@ app.post("/api/generate-token", async (req, res) => {
     const customToken = await generateCustomToken(accountId);
     res.json({ customToken });
   } catch (error) {
-    res.status(500).json({ error: "Failed to generate custom token" });
+  if (error.message === "Account ID does not exist in the database.") {
+    return res.status(404).json({ error: "Account ID not found" });
   }
+  res.status(500).json({ error: "Failed to generate custom token" });
+}
 });
