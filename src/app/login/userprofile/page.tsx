@@ -21,11 +21,11 @@ export default function UserProfile() {
   const [lastName, setLastName] = useState("");
   const [showConfirm, setShowConfirm] = useState(false);
 
-  useEffect(() => {
+  /*useEffect(() => {
     if (!loading && !user && !showConfirm) {
-      router.push("/login");
+      router.push("/home/login");
     }
-  }, [user, loading, showConfirm, router]);
+  }, [user, loading, showConfirm, router]);*/
 
   useEffect(() => {
     const fetchUserData = async () => {

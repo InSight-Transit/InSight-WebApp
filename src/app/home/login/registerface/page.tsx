@@ -46,9 +46,9 @@ function Welcome() {
       const json = await response.json();
       console.log(json);
 
-      // Redirect to user profile page
+      // Redirect to login page
       setTimeout(() => {
-      router.push("/login/userprofile");
+      router.push("/home/login");
       }, 5000);
     } catch (error) {
       if (error instanceof Error) {
