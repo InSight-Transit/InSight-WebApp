@@ -47,8 +47,6 @@ export default function Welcome() {
 
   async function verify(base64Img: string) {
     const url = "http://127.0.0.1:8000/api/search";
-    const generateTokenUrl = "http://127.0.0.1:8000/api/generate-token"; // API to generate custom token
-
 
     try {
       const byteCharacters = atob(base64Img.split(',')[1]);
@@ -79,7 +77,7 @@ export default function Welcome() {
     }
 
     // Fetch the custom token from your backend
-    const tokenResponse = await fetch(generateTokenUrl, {
+    const tokenResponse = await fetch("/api/checkout", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ accountId }),
