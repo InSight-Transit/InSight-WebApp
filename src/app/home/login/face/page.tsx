@@ -70,7 +70,10 @@ export default function Welcome() {
 
       const json = await response.json();
       console.log(json['Account ID']);
-      router.push(`/home/login/face/success?accountId=${json['Account ID']}`);
+      // Redirect to user profile page
+      setTimeout(() => {
+      router.push("/login/userprofile");
+      }, 5000);
     } catch (error) {
       if (error instanceof Error) {
         console.error(error.message);
