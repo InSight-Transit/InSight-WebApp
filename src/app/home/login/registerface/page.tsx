@@ -59,7 +59,7 @@ function Welcome() {
     }
   }
 
-  useEffect(() => {
+    useEffect(() => {
     const video = videoRef.current;
 
     if (video) {
@@ -68,16 +68,19 @@ function Welcome() {
           const stream = await navigator.mediaDevices.getUserMedia({ video: true });
           video.srcObject = stream;
 
-          // Wait until metadata is loaded before playing
           video.onloadedmetadata = () => {
-            video.play().catch((err) => {
-              console.error("Video playback failed:", err);
-            });
+            // Defer play to avoid Chromium race condition
+            setTimeout(() => {
+              video.play().catch((err) => {
+                console.error("Playback error:", err);
+              });
+            }, 100); // 100ms usually enough, increase if needed
           };
         } catch (err) {
-          console.error("Error accessing webcam:", err);
+          console.error("Webcam access error:", err);
         }
       };
+
       getVideo();
     }
 
@@ -91,7 +94,7 @@ function Welcome() {
 
       const context = canvas.getContext('2d');
       if (!context) {
-        console.error("Context element is not available.");
+        console.error("Context is not available.");
         return;
       }
 
@@ -99,7 +102,6 @@ function Welcome() {
       canvas.height = video.videoHeight;
 
       context.drawImage(video, 0, 0, canvas.width, canvas.height);
-
       const base64Img = canvas.toDataURL('image/png');
       if (base64Img && base64Img !== "") {
         verify(base64Img);
@@ -108,6 +110,7 @@ function Welcome() {
 
     return () => clearInterval(interval);
   }, []);
+
 
 
   return (
