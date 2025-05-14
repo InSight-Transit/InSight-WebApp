@@ -20,3 +20,16 @@ bun dev
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+
+
+
+#### ABSTRACT
+
+Facial Recognition as a Biometric Payment Method on Public Transit
+
+
+  Public transportation is necessary for many Americans who work minimum-wage jobs and students nationwide. According to the American Public Transportation Association, people in the US took 9.9 billion trips on public transportation. It is also a 79 billion-dollar industry that employs more than 430,000 people. In addition to this, every dollar spent generates 5 dollars in economic returns (APTA, 2023). 
+  
+  However, current methods for paying fares when boarding public transportation waste a large amount of time and money. According to a report by the National Association of City Transport Officials, paying for a bus fare while boarding could take up to 9 seconds per passenger. When accounting for all buses in the US, this means bus drivers “spend at least six million hours at bus stops each year, directly costing agencies an estimated $700 million” (NACTO, 2017). 
+ 
+ There is a lot of room for improvement to address this through automation which would reduce waiting times and increase customer comfort as a bonus. This project aims to reduce boarding times on public transit routes by the use of a facial recognition payment device. This device scans passengers’ faces registered with the system and automatically charges them their fare as they board the vehicle. This is paired with a kiosk where passengers would register an account, their face, and their preferred payment method. The outcome would decrease boarding times to the duration of time it takes for passengers to walk into the vehicle.
