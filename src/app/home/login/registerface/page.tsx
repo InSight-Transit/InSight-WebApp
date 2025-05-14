@@ -61,14 +61,21 @@ function Welcome() {
 
   useEffect(() => {
     const video = videoRef.current;
+
     if (video) {
       const getVideo = async () => {
         try {
           const stream = await navigator.mediaDevices.getUserMedia({ video: true });
           video.srcObject = stream;
-          await video.play();
+
+          // Wait until metadata is loaded before playing
+          video.onloadedmetadata = () => {
+            video.play().catch((err) => {
+              console.error("Video playback failed:", err);
+            });
+          };
         } catch (err) {
-          console.error("Error accessing webcam: ", err);
+          console.error("Error accessing webcam:", err);
         }
       };
       getVideo();
@@ -76,6 +83,7 @@ function Welcome() {
 
     const interval = setInterval(() => {
       const canvas = canvasRef.current;
+      const video = videoRef.current;
       if (!canvas || !video) {
         console.error("Canvas or video element is not available.");
         return;
@@ -96,10 +104,11 @@ function Welcome() {
       if (base64Img && base64Img !== "") {
         verify(base64Img);
       }
-    }, 5000); // Run every 5 seconds
+    }, 5000);
 
     return () => clearInterval(interval);
   }, []);
+
 
   return (
     <div className="bg-sky-700 min-h-screen w-full">
