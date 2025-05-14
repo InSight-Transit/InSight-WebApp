@@ -76,22 +76,32 @@ export default function Welcome() {
       throw new Error("Account ID is missing from the API response.");
     }
 
-    // Log in the user anonymously
-    const { getAuth, signInAnonymously } = await import("firebase/auth");
+    // Fetch the custom token from your backend
+    const tokenResponse = await fetch("http://127.0.0.1:8000/api/generate-token", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ accountId }),
+    });
+
+    if (!tokenResponse.ok) {
+      throw new Error("Failed to fetch custom token from backend.");
+    }
+    const { customToken } = await tokenResponse.json();
+
+    // Log in the user using the custom token
+    const { getAuth, signInWithCustomToken } = await import("firebase/auth");
     const auth = getAuth();
 
     try {
-      const userCredential = await signInAnonymously(auth);
-      console.log("User logged in anonymously:", userCredential.user);
+      const userCredential = await signInWithCustomToken(auth, customToken);
+      console.log("User logged in successfully:", userCredential.user);
 
       // Redirect to user profile page
-      setTimeout(() => {
       router.push("/login/userprofile");
-      }, 5000);
     } catch (error) {
-      console.error("Error logging in anonymously:", error);
-    } 
-  } catch (error) {
+      console.error("Error logging in with custom token:", error);
+    }
+    } catch (error) {
       if (error instanceof Error) {
         console.error(error.message);
       } else {
