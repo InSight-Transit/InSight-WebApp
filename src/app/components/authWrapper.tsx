@@ -10,7 +10,7 @@ export default function withAuth<T extends object>(Component: React.FC) {
 
     useEffect(() => {
       if (!loading && !user) {
-        router.replace("/login"); // Redirect if not logged in
+        router.replace("/home/login"); // Redirect if not logged in
       }
     }, [user, loading, router]);
 

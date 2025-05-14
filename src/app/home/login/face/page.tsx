@@ -69,12 +69,29 @@ export default function Welcome() {
       }
 
       const json = await response.json();
-      console.log(json['Account ID']);
+    const accountId = json['Account ID'] || json['account_id'] || json['AccountID'];
+    console.log(`Account ID: ${accountId}`);
+
+    if (!accountId) {
+      throw new Error("Account ID is missing from the API response.");
+    }
+
+    // Log in the user anonymously
+    const { getAuth, signInAnonymously } = await import("firebase/auth");
+    const auth = getAuth();
+
+    try {
+      const userCredential = await signInAnonymously(auth);
+      console.log("User logged in anonymously:", userCredential.user);
+
       // Redirect to user profile page
       setTimeout(() => {
       router.push("/login/userprofile");
       }, 5000);
     } catch (error) {
+      console.error("Error logging in anonymously:", error);
+    } 
+  } catch (error) {
       if (error instanceof Error) {
         console.error(error.message);
       } else {
