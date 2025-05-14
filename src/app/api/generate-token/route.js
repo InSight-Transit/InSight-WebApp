@@ -22,8 +22,12 @@ async function generateCustomToken(accountId) {
   }
 }
 
-// Example API endpoint to generate a custom token
-app.post("/api/generate-token", async (req, res) => {
+// Next.js API route handler
+export default async function handler(req, res) {
+  if (req.method !== "POST") {
+    return res.status(405).json({ error: "Method not allowed" }); // Only allow POST requests
+  }
+
   const { accountId } = req.body;
   if (!accountId) {
     return res.status(400).json({ error: "Account ID is required" });
@@ -31,11 +35,11 @@ app.post("/api/generate-token", async (req, res) => {
 
   try {
     const customToken = await generateCustomToken(accountId);
-    res.json({ customToken });
+    res.status(200).json({ customToken });
   } catch (error) {
-  if (error.message === "Account ID does not exist in the database.") {
-    return res.status(404).json({ error: "Account ID not found" });
+    if (error.message === "Account ID does not exist in the database.") {
+      return res.status(404).json({ error: "Account ID not found" });
+    }
+    res.status(500).json({ error: "Failed to generate custom token" });
   }
-  res.status(500).json({ error: "Failed to generate custom token" });
 }
-});
