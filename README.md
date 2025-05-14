@@ -2,6 +2,7 @@
 
 # InSight: Alternative Biometric Payment Integration in Public Transport Systems (Kiosk)
 
+Link to the project:  [InSight](https://github.com/InSight-Transit/InSight-WebApp)
 
 
 
