@@ -77,7 +77,7 @@ export default function Welcome() {
     }
 
     // Fetch the custom token from your backend
-    const tokenResponse = await fetch("/api/checkout", {
+    const tokenResponse = await fetch("/api/generate-token", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ accountId }),
