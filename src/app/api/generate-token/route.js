@@ -22,24 +22,34 @@ async function generateCustomToken(accountId) {
   }
 }
 
-// Next.js API route handler
-export default async function handler(req, res) {
-  if (req.method !== "POST") {
-    return res.status(405).json({ error: "Method not allowed" }); // Only allow POST requests
-  }
-
-  const { accountId } = req.body;
-  if (!accountId) {
-    return res.status(400).json({ error: "Account ID is required" });
-  }
-
+// Named export for the POST method
+export async function POST(req) {
   try {
-    const customToken = await generateCustomToken(accountId);
-    res.status(200).json({ customToken });
-  } catch (error) {
-    if (error.message === "Account ID does not exist in the database.") {
-      return res.status(404).json({ error: "Account ID not found" });
+    const body = await req.json(); // Parse the request body
+    const { accountId } = body;
+
+    if (!accountId) {
+      return new Response(JSON.stringify({ error: "Account ID is required" }), {
+        status: 400,
+        headers: { "Content-Type": "application/json" },
+      });
     }
-    res.status(500).json({ error: "Failed to generate custom token" });
+
+    const customToken = await generateCustomToken(accountId);
+
+    return new Response(JSON.stringify({ customToken }), {
+      status: 200,
+      headers: { "Content-Type": "application/json" },
+    });
+  } catch (error) {
+    console.error("Error in POST /generate-token:", error);
+
+    return new Response(
+      JSON.stringify({ error: "Failed to generate custom token" }),
+      {
+        status: 500,
+        headers: { "Content-Type": "application/json" },
+      }
+    );
   }
 }
