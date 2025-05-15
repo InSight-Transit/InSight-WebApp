@@ -14,7 +14,7 @@ function Welcome() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   async function verify(base64Img: string) {
-    const url = "http://127.0.0.1:8000/api/addface";
+    const url = process.env.NEXT_PUBLIC_API_BASE_URL;
 
     try {
       const user = auth.currentUser;
