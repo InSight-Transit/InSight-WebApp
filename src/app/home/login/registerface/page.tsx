@@ -59,19 +59,25 @@ function Welcome() {
     }
   }
 
-  useEffect(() => {
-    const video = videoRef.current;
+useEffect(() => {
+  const video = videoRef.current;
 
-    if (video) {
-      const getVideo = async () => {
-        try {
-          const stream = await navigator.mediaDevices.getUserMedia({ video: true });
-          video.srcObject = stream;
+  if (video) {
+    const getVideo = async () => {
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+        video.srcObject = stream;
 
-          // Wait for metadata to load, then try to play
-          video.onloadedmetadata = () => {
+        video.onloadedmetadata = () => {
+          // Check if video is already playing before calling play()
+          const isPlaying =
+            video.currentTime > 0 &&
+            !video.paused &&
+            !video.ended &&
+            video.readyState > video.HAVE_CURRENT_DATA;
+
+          if (!isPlaying) {
             const playPromise = video.play();
-
             if (playPromise !== undefined) {
               playPromise
                 .then(() => {
@@ -82,41 +88,42 @@ function Welcome() {
                   // Optionally update UI to show paused state
                 });
             }
-          };
-        } catch (err) {
-          console.error("Error accessing webcam:", err);
-        }
-      };
+          }
+        };
+      } catch (err) {
+        console.error("Error accessing webcam:", err);
+      }
+    };
 
-      getVideo();
+    getVideo();
+  }
+
+  const interval = setInterval(() => {
+    const canvas = canvasRef.current;
+    const video = videoRef.current;
+    if (!canvas || !video) {
+      console.error("Canvas or video element is not available.");
+      return;
     }
 
-    const interval = setInterval(() => {
-      const canvas = canvasRef.current;
-      const video = videoRef.current;
-      if (!canvas || !video) {
-        console.error("Canvas or video element is not available.");
-        return;
-      }
+    const context = canvas.getContext('2d');
+    if (!context) {
+      console.error("Context is not available.");
+      return;
+    }
 
-      const context = canvas.getContext('2d');
-      if (!context) {
-        console.error("Context is not available.");
-        return;
-      }
+    canvas.width = video.videoWidth;
+    canvas.height = video.videoHeight;
 
-      canvas.width = video.videoWidth;
-      canvas.height = video.videoHeight;
+    context.drawImage(video, 0, 0, canvas.width, canvas.height);
+    const base64Img = canvas.toDataURL('image/png');
+    if (base64Img && base64Img !== "") {
+      verify(base64Img);
+    }
+  }, 10000);
 
-      context.drawImage(video, 0, 0, canvas.width, canvas.height);
-      const base64Img = canvas.toDataURL('image/png');
-      if (base64Img && base64Img !== "") {
-        verify(base64Img);
-      }
-    }, 5000);
-
-    return () => clearInterval(interval);
-  }, []);
+  return () => clearInterval(interval);
+}, []);
 
 
 
