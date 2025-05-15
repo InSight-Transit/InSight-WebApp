@@ -168,7 +168,13 @@ function Welcome() {
       <div className="flex flex-col items-center justify-center flex-grow">
         <div className="flex flex-col items-center">
           <div className="bg-sky-700 p-6 rounded-lg">
-            <video ref={videoRef} style={{ width: "100%", maxWidth: "500px" }} autoPlay />
+            <video
+              ref={videoRef}
+              muted
+              autoPlay
+              playsInline
+              style={{ width: "100%", maxWidth: "500px" }}
+            />
           </div>
         </div>
 
