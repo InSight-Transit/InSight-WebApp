@@ -130,10 +130,10 @@ function Welcome() {
                 if (playPromise !== undefined) {
                   playPromise
                     .then(() => {
-                      console.log("✅ Video playback started successfully.");
+                      console.log("Video playback started successfully.");
                     })
                     .catch((error) => {
-                      console.warn("⚠️ Video playback prevented:", error);
+                      console.warn("Video playback prevented:", error);
                       // Optionally update UI to show paused state
                     });
                 }
@@ -198,9 +198,7 @@ function Welcome() {
         </div>
 
       <ButtonLinks/>
-      <button onClick={() => captureImage()}> Capture </button>
       <canvas ref={canvasRef} style={{ display: 'none' }} />
-      {/*base64Image && <img src={base64Image} alt="Captured frame" />*/}
       </div>
     </div>
   );

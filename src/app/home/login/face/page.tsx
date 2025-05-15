@@ -157,7 +157,7 @@ export default function Welcome() {
     // Use captureImage for periodic capture
     const interval = setInterval(() => {
       captureImage();
-    }, 10000);
+    }, 5000);
 
     return () => clearInterval(interval);
   }, []);
