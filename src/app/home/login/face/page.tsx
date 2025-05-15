@@ -46,7 +46,7 @@ export default function Welcome() {
   };
 
   async function verify(base64Img: string) {
-    const url = process.env.NEXT_PUBLIC_API_BASE_URL;
+    const url = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/search`;
     if (!url) {
       throw new Error("API base URL is not defined in environment variables.");
     }
