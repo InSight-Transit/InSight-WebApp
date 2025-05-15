@@ -15,7 +15,7 @@ function Welcome() {
 
   async function verify(base64Img: string) {
     const url = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/addface`;
-
+    console.log("API URL:", url);
     if (!url) {
       console.error("API base URL is not defined in environment variables.");
       return;
