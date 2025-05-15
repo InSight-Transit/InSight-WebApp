@@ -114,25 +114,48 @@ export default function Welcome() {
 
   useEffect(() => {
     const video = videoRef.current;
+
     if (video) {
       const getVideo = async () => {
         try {
           const stream = await navigator.mediaDevices.getUserMedia({ video: true });
           video.srcObject = stream;
-          await video.play();
+
+          video.onloadedmetadata = () => {
+            // Check if video is already playing before calling play()
+            const isPlaying =
+              video.currentTime > 0 &&
+              !video.paused &&
+              !video.ended &&
+              video.readyState > video.HAVE_CURRENT_DATA;
+
+            if (!isPlaying) {
+              const playPromise = video.play();
+              if (playPromise !== undefined) {
+                playPromise
+                  .then(() => {
+                    console.log("✅ Video playback started successfully.");
+                  })
+                  .catch((error) => {
+                    console.warn("⚠️ Video playback prevented:", error);
+                    // Optionally update UI to show paused state
+                  });
+              }
+            }
+          };
         } catch (err) {
           console.error("Error accessing webcam: ", err);
         }
       };
+
       getVideo();
     }
 
-    // Automatically capture and verify every 3 seconds
+    // Use captureImage for periodic capture
     const interval = setInterval(() => {
       captureImage();
-    }, 5000);
+    }, 10000);
 
-    // Cleanup interval on component unmount
     return () => clearInterval(interval);
   }, []);
 
@@ -150,8 +173,10 @@ export default function Welcome() {
           <div className="bg-sky-700 p-6 rounded-lg">
             <video
               ref={videoRef}
-              style={{ width: "100%", maxWidth: "500px", transform: "scaleX(-1)" }}
+              muted
               autoPlay
+              playsInline
+              style={{ width: "100%", maxWidth: "500px" }}
             />
           </div>
         </div>

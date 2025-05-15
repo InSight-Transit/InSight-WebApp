@@ -113,15 +113,29 @@ function Welcome() {
             video.srcObject = stream;
 
             video.onloadedmetadata = () => {
-              // Defer play to avoid Chromium race condition
-              setTimeout(() => {
-                video.play().catch((err) => {
-                  console.error("Playback error:", err);
-                });
-              }, 100); // 100ms usually enough, increase if needed
+              // Check if video is already playing before calling play()
+              const isPlaying =
+                video.currentTime > 0 &&
+                !video.paused &&
+                !video.ended &&
+                video.readyState > video.HAVE_CURRENT_DATA;
+
+              if (!isPlaying) {
+                const playPromise = video.play();
+                if (playPromise !== undefined) {
+                  playPromise
+                    .then(() => {
+                      console.log("✅ Video playback started successfully.");
+                    })
+                    .catch((error) => {
+                      console.warn("⚠️ Video playback prevented:", error);
+                      // Optionally update UI to show paused state
+                    });
+                }
+              }
             };
           } catch (err) {
-            console.error("Webcam access error:", err);
+            console.error("Error accessing webcam:", err);
           }
         };
 
@@ -150,7 +164,7 @@ function Welcome() {
         if (base64Img && base64Img !== "") {
           verify(base64Img);
         }
-      }, 5000);
+      }, 10000);
 
       return () => clearInterval(interval);
     }, []);
