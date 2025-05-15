@@ -105,19 +105,56 @@ function Welcome() {
   
     useEffect(() => {
       const video = videoRef.current;
+
       if (video) {
         const getVideo = async () => {
           try {
             const stream = await navigator.mediaDevices.getUserMedia({ video: true });
             video.srcObject = stream;
-            await video.play();
+
+            video.onloadedmetadata = () => {
+              // Defer play to avoid Chromium race condition
+              setTimeout(() => {
+                video.play().catch((err) => {
+                  console.error("Playback error:", err);
+                });
+              }, 100); // 100ms usually enough, increase if needed
+            };
           } catch (err) {
-            console.error("Error accessing webcam: ", err);
+            console.error("Webcam access error:", err);
           }
         };
+
         getVideo();
       }
+
+      const interval = setInterval(() => {
+        const canvas = canvasRef.current;
+        const video = videoRef.current;
+        if (!canvas || !video) {
+          console.error("Canvas or video element is not available.");
+          return;
+        }
+
+        const context = canvas.getContext('2d');
+        if (!context) {
+          console.error("Context is not available.");
+          return;
+        }
+
+        canvas.width = video.videoWidth;
+        canvas.height = video.videoHeight;
+
+        context.drawImage(video, 0, 0, canvas.width, canvas.height);
+        const base64Img = canvas.toDataURL('image/png');
+        if (base64Img && base64Img !== "") {
+          verify(base64Img);
+        }
+      }, 5000);
+
+      return () => clearInterval(interval);
     }, []);
+
 
   return (
     <div className="bg-sky-700 min-h-screen w-full">
