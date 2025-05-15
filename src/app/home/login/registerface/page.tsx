@@ -59,7 +59,7 @@ function Welcome() {
     }
   }
 
-    useEffect(() => {
+  useEffect(() => {
     const video = videoRef.current;
 
     if (video) {
@@ -68,16 +68,23 @@ function Welcome() {
           const stream = await navigator.mediaDevices.getUserMedia({ video: true });
           video.srcObject = stream;
 
+          // Wait for metadata to load, then try to play
           video.onloadedmetadata = () => {
-            // Defer play to avoid Chromium race condition
-            setTimeout(() => {
-              video.play().catch((err) => {
-                console.error("Playback error:", err);
-              });
-            }, 100); // 100ms usually enough, increase if needed
+            const playPromise = video.play();
+
+            if (playPromise !== undefined) {
+              playPromise
+                .then(() => {
+                  console.log("✅ Video playback started successfully.");
+                })
+                .catch((error) => {
+                  console.warn("⚠️ Video playback prevented:", error);
+                  // Optionally update UI to show paused state
+                });
+            }
           };
         } catch (err) {
-          console.error("Webcam access error:", err);
+          console.error("Error accessing webcam:", err);
         }
       };
 
@@ -113,6 +120,7 @@ function Welcome() {
 
 
 
+
   return (
     <div className="bg-sky-700 min-h-screen w-full">
       <NavHeader />
@@ -125,7 +133,13 @@ function Welcome() {
       <div className="flex flex-col items-center justify-center flex-grow">
         <div className="flex flex-col items-center">
           <div className="bg-sky-700 p-6 rounded-lg">
-            <video ref={videoRef} style={{ width: "100%", maxWidth: "500px" }} autoPlay />
+            <video
+              ref={videoRef}
+              muted
+              autoPlay
+              playsInline
+              style={{ width: "100%", maxWidth: "500px" }}
+            />
           </div>
         </div>
         <ButtonLinks />
