@@ -1,3 +1,8 @@
+/*
+  tap page
+  This page is for tapping a card to log in.
+*/
+
 "use client";
 
 import ButtonLinks from "@/app/components/ButtonLinks";

@@ -1,3 +1,8 @@
+/*
+  clock.tsx
+  This component displays a digital clock that updates every minute top right of screen.
+*/
+
 'use client';
 import React, { useState, useEffect } from 'react';
 

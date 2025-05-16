@@ -1,6 +1,9 @@
+/*
+  face/success page
+  Success page for face login.
+*/
+
 "use client";
-// import { useEffect, useRef, useState } from "react";
-// import ButtonLinks from "@/app/components/ButtonLinks";
 import { Suspense } from "react";
 import NavHeader from "@/app/header";
 import { useSearchParams } from "next/navigation";

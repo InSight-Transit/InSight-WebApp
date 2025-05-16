@@ -1,3 +1,8 @@
+/*
+  login page
+  Login page that presents login options for user and if logged in redirects to user profile.
+*/
+
 "use client";
 import Link from "next/link";
 import NavHeader from "../../header";
@@ -9,12 +14,11 @@ import { useEffect } from "react";
 
 export default function Welcome() {
   const { t } = useTranslation("common");
-  const { user } = useAuth(); // Get the authenticated user
+  const { user } = useAuth();
   const router = useRouter();
 
   useEffect(() => {
     if (user) {
-      // Redirect to user profile if logged in
       router.push("/login/userprofile");
     }
   }, [user, router]);

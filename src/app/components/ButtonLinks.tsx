@@ -1,4 +1,7 @@
-// components/ButtonLinks.tsx
+/*
+  ButtonLinks component
+  This component is used to render a set of buttons for navigation.
+*/
 
 "use client";
 import Link from 'next/link';
@@ -11,7 +14,7 @@ interface ButtonLinksProps {
    * Provide a non-empty string to customize the back button link.
    * If you want to hide the back button, set it to an empty string ('').
    */
-  backHref?: string;  
+  backHref?: string;
 
    /**
    * Set exitHref to an empty string ('') to hide the exit button.
@@ -22,10 +25,10 @@ interface ButtonLinksProps {
    /**
     * The Next button is hidden by default.
     * Provide a non-empty string to show it.
-    */ 
-  agreeHref?: string; 
-  
-    /** Custom label for the Next button. Defaults to "Next" 
+    */
+  agreeHref?: string;
+
+    /** Custom label for the Next button. Defaults to "Next"
     * For example:
     *   <ButtonLinks
         agreeHref="/"
@@ -49,8 +52,8 @@ const ButtonLinks: React.FC<ButtonLinksProps> = ({ backHref, exitHref, agreeHref
             </button>
           </Link>
         ) : (
-          <button 
-            onClick={() => router.back()} 
+          <button
+            onClick={() => router.back()}
             className="border-none text-[3vw] w-full h-[6vw] outline-none bg-white text-black font-semibold rounded-lg"
           >
             {t("back")}

@@ -1,3 +1,8 @@
+/*
+  header.tsx
+  Header component for the application that includes title, logout, and clock.
+*/
+
 "use client";
 import { useTranslation } from "react-i18next";
 import DigitalClock from "./clock";
@@ -5,8 +10,6 @@ import { useAuth } from "./components/authContext";
 
 
 export default function NavHeader({hideLogout}: {hideLogout?: boolean}) {
-  // Added functionality for logout
-  // TODO: Update 'logout' to match theme
   const { t } = useTranslation("common");
   const { user, logout } = useAuth();
 

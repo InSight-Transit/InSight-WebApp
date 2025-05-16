@@ -1,3 +1,8 @@
+/*
+  register page
+  Register page for creating a new account.
+*/
+
 "use client";
 
 import { useState } from "react";
@@ -7,7 +12,6 @@ import NavHeader from "@/app/header";
 import { useRouter } from "next/navigation";
 import { useTranslation } from "react-i18next";
 
-// use ButtonLinks component to replace the back and exit buttons
 export default function SignUp() {
   const { t } = useTranslation("common");
   const [firstName, setFirstName] = useState("");
@@ -38,7 +42,6 @@ export default function SignUp() {
         <h2 className="text-white text-[3vw] font-bold pb-[4vw]">{t("fields")}</h2>
       </div>
       <form onSubmit={handleSignUp} className="flex flex-col items-center justify-center w-full">
-        {/* First Name & Last Name */}
         <div className="pb-[4vw] flex flex-1 justify-center items-center gap-[3vw] w-10/12">
           <div className="w-6/12">
             <h3 className="text-white text-[2vw] pb-[0.2vw]">{t("firstName")}</h3>
@@ -61,8 +64,6 @@ export default function SignUp() {
             />
           </div>
         </div>
-
-        {/* Phone Number & Email */}
         <div className="pb-[4vw] flex flex-1 justify-center items-center gap-[3vw] w-10/12">
         <div className="w-6/12">
             <h3 className="text-white text-[2vw] pb-[0.2vw]">{t("email")}</h3>
@@ -85,8 +86,6 @@ export default function SignUp() {
             />
           </div>
         </div>
-
-        {/* Password */}
         <div className="pb-[4vw] flex flex-1 justify-center items-center gap-[3vw] w-10/12">
           <div className="w-6/12">
             <h3 className="text-white text-[2vw] pb-[0.2vw]">{t("password")}</h3>

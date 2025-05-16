@@ -1,3 +1,9 @@
+/*
+  face page
+  Facial recognition login page that captures image from webcam and sends it to server for verification.
+  If the verification is successful, it generates a custom token and logs in the user.
+*/
+
 "use client";
 import { useEffect, useRef, useState } from "react";
 import ButtonLinks from "@/app/components/ButtonLinks";
@@ -79,7 +85,6 @@ export default function Welcome() {
       throw new Error("Account ID is missing from the API response.");
     }
 
-    // Fetch the custom token from your backend
     const tokenResponse = await fetch("/api/generate-token", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -93,7 +98,6 @@ export default function Welcome() {
     const { customToken } = await tokenResponse.json();
     console.log("Custom token generated:", customToken);
 
-    // Log in the user using the custom token
     const { getAuth, signInWithCustomToken } = await import("firebase/auth");
     const auth = getAuth();
 
@@ -101,7 +105,6 @@ export default function Welcome() {
       const userCredential = await signInWithCustomToken(auth, customToken);
       console.log("User logged in successfully:", userCredential.user);
 
-      // Redirect to user profile page
       router.push("/login/userprofile");
     } catch (error) {
       console.error("Error logging in with custom token:", error);
@@ -125,7 +128,6 @@ export default function Welcome() {
           video.srcObject = stream;
 
           video.onloadedmetadata = () => {
-            // Check if video is already playing before calling play()
             const isPlaying =
               video.currentTime > 0 &&
               !video.paused &&
@@ -141,7 +143,6 @@ export default function Welcome() {
                   })
                   .catch((error) => {
                     console.warn("Video playback prevented:", error);
-                    // Optionally update UI to show paused state
                   });
               }
             }
@@ -154,7 +155,6 @@ export default function Welcome() {
       getVideo();
     }
 
-    // Use captureImage for periodic capture
     const interval = setInterval(() => {
       captureImage();
     }, 5000);

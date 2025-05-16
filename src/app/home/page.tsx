@@ -1,3 +1,8 @@
+/*
+  registerface page
+  This page is used for registering a face using the webcam.
+*/
+
 "use client";
 
 import Link from "next/link";

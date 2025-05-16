@@ -1,13 +1,17 @@
+/*
+  useTransactions component
+  Used to fetch and manage transactions.
+*/
+
 import { useEffect, useState } from "react";
 import { useAuth } from "./authContext";
 
-// Define the structure of a transaction
 interface Transaction {
   id: string;
   description: string;
   amount: number;
   status: string;
-  created: number; // Timestamp in seconds
+  created: number;
 }
 
 export function useTransactions() {

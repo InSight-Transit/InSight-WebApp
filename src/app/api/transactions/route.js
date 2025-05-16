@@ -1,3 +1,8 @@
+/*
+  transactions/route.js
+  This route handles the fetching of transactions for a given userId from Stripe.
+*/
+
 import Stripe from "stripe";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {

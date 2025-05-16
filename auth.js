@@ -1,4 +1,7 @@
-// auth.js
+/*
+  auth.js page
+  Handles user authentication using Firebase Authentication and Firestore.
+*/
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged, setPersistence, browserLocalPersistence } from "firebase/auth";
 import { getFirestore, doc, setDoc, getDoc, updateDoc, increment } from "firebase/firestore";
 import { app } from "./firebaseConfig";
@@ -23,11 +26,9 @@ onAuthStateChanged(auth, (user) => {
   // Sign-up function, updated with balance
 export const signUp = async (email, password, userData) => {
   try {
-    // Create user in Firebase Authentication
     const userCredential = await createUserWithEmailAndPassword(auth, email, password);
     const user = userCredential.user;
 
-    // Store user details in Firestore
     await setDoc(doc(db, "users", user.uid), {
       firstName: userData.firstName,
       lastName: userData.lastName,
@@ -45,7 +46,7 @@ export const signUp = async (email, password, userData) => {
   }
 };
 
-// Sign In (w/ balance)
+// Sign In
 export const signIn = async (email, password) => {
   try {
     const userCredential = await signInWithEmailAndPassword(auth, email, password);
@@ -74,7 +75,7 @@ export const updateUserBalance = async (userId, amount) => {
   }
 };
 
-// Log Out function (unused atm)
+// Log Out function
 export const logOut = async () => {
   try {
     await signOut(auth);
@@ -83,5 +84,5 @@ export const logOut = async () => {
   }
 };
 
-// Exporting auth instance for use in other parts of the app
+// Exporting auth instance for use inside app
 export { auth, signOut };

@@ -1,6 +1,10 @@
+/*
+  checkout/route.js
+  This route handles the creation of a Stripe Checkout session.
+*/
+
 import Stripe from 'stripe';
 
-// redirects users to a checkout page to reload account
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
   apiVersion: '2022-11-15',
 });

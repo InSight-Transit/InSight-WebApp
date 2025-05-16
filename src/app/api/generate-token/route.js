@@ -1,3 +1,9 @@
+/*
+  generate-token/route.js
+  This route handles the generation of a custom Firebase token for a given Account ID (uid).
+  Account ID is expected to be passed in the request body by MongoDB.
+*/
+
 import admin from "firebase-admin";
 
 // Initialize Firebase Admin SDK
