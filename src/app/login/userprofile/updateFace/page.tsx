@@ -17,7 +17,7 @@ function Welcome() {
 
 
   async function deleteFaceData() {
-    const url = "http://127.0.0.1:8000/deletefacedata";
+    const url = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/deletefacedata`;
 
     try {
       const user = auth.currentUser;
@@ -53,7 +53,7 @@ function Welcome() {
   }
 
   async function verify(base64Img: string) {
-    const url = "http://127.0.0.1:8000/api/addface";
+    const url = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/addface`;
 
     try {
       const user = auth.currentUser;
