@@ -2,7 +2,9 @@
 
 # InSight: Alternative Biometric Payment Integration in Public Transport Systems (Kiosk)
 
-## Link to the project:  [InSight](https://github.com/InSight-Transit/InSight-WebApp)
+## Link to the [Kiosk](https://github.com/InSight-Transit/InSight-WebApp)
+## Link to the [on board camera](https://github.com/InSight-Transit/InSight-Onboard-Camera)
+## Link to the [API](https://github.com/InSight-Transit/InSight-API)
 
 
 
@@ -57,4 +59,3 @@ bun dev
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
