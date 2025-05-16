@@ -19,41 +19,41 @@ function Welcome() {
   
     // Original:
     // const [_base64Image, setBase64Image] = useState('');
-    const [, setBase64Image] = useState('');
+    // const [, setBase64Image] = useState('');
   
-    const captureImage = () => {
-      // Flush variable states when you click verify
-      const video = videoRef.current;
-      const canvas = canvasRef.current;
+    // const captureImage = () => {
+    //   // Flush variable states when you click verify
+    //   const video = videoRef.current;
+    //   const canvas = canvasRef.current;
   
-      if (!canvas) {
-        console.error("Canvas element is not available.");
-        return;
-      }
-      if (!video) {
-        console.error("Video element is not available.");
-        return;
-      }
+    //   if (!canvas) {
+    //     console.error("Canvas element is not available.");
+    //     return;
+    //   }
+    //   if (!video) {
+    //     console.error("Video element is not available.");
+    //     return;
+    //   }
   
-      const context = canvas.getContext('2d');
-      if (!context) {
-        console.error("Context element is not available.");
-        return;
-      }
+    //   const context = canvas.getContext('2d');
+    //   if (!context) {
+    //     console.error("Context element is not available.");
+    //     return;
+    //   }
   
-      canvas.width = video.videoWidth;
-      canvas.height = video.videoHeight;
+    //   canvas.width = video.videoWidth;
+    //   canvas.height = video.videoHeight;
   
-      context.drawImage(video, 0, 0, canvas.width, canvas.height);
+    //   context.drawImage(video, 0, 0, canvas.width, canvas.height);
   
-      const base64Img = canvas.toDataURL('image/png');
-      setBase64Image(base64Img);
+    //   const base64Img = canvas.toDataURL('image/png');
+    //   setBase64Image(base64Img);
   
-      // Only send the image after it's set
-      if (base64Img && base64Img !== "") {
-        verify(base64Img);
-      }
-    };
+    //   // Only send the image after it's set
+    //   if (base64Img && base64Img !== "") {
+    //     verify(base64Img);
+    //   }
+    // };
   
     // Convert base64 string to FormData and send it
     async function verify(base64Img: string) {
