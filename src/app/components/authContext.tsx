@@ -1,13 +1,18 @@
+/*
+  authContext component
+  This file contains the AuthProvider component and the useAuth hook.
+  This provides authentication context to the pages that require it.
+*/
+
 "use client";
 import { createContext, useContext, useEffect, useState } from "react";
-import { auth, logOut } from "../../../auth"; // Import from auth.js
+import { auth, logOut } from "../../../auth";
 import { onAuthStateChanged, User } from "firebase/auth";
 import { getFirestore, doc, onSnapshot } from "firebase/firestore";
 import { app } from "../../../firebaseConfig";
 
 const db = getFirestore(app);
 
-// Define types
 interface AuthContextType {
   user: User | null;
   balance: number;
@@ -15,7 +20,6 @@ interface AuthContextType {
   logout: () => Promise<void>;
 }
 
-// Create context
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
@@ -24,7 +28,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    let unsubscribeBalance: (() => void) | null = null; // Store Firestore listener
+    let unsubscribeBalance: (() => void) | null = null;
 
     const unsubscribeAuth = onAuthStateChanged(auth, (user) => {
       setUser(user);
@@ -33,7 +37,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       if (user) {
         const userRef = doc(db, "users", user.uid);
 
-        // Subscribe to real-time balance updates
         unsubscribeBalance = onSnapshot(
           userRef,
           (docSnapshot) => {
@@ -48,14 +51,14 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       } else {
         setBalance(0);
         if (unsubscribeBalance) {
-          unsubscribeBalance(); // Stop listening when user logs out
+          unsubscribeBalance();
         }
       }
     });
 
     return () => {
-      unsubscribeAuth(); // Cleanup auth listener
-      if (unsubscribeBalance) unsubscribeBalance(); // Cleanup Firestore listener
+      unsubscribeAuth();
+      if (unsubscribeBalance) unsubscribeBalance();
     };
   }, []);
 
@@ -67,7 +70,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   );
 }
 
-// Custom Hook
 export function useAuth() {
   const context = useContext(AuthContext);
   if (!context) {

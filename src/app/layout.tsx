@@ -1,3 +1,8 @@
+/*
+  layout page
+  Page used to set up the global layout.
+*/
+
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";

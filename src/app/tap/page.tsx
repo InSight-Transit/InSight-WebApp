@@ -1,3 +1,8 @@
+/*
+  tap page
+  Page used to display the tap card screen.
+*/
+
 "use client";
 
 import NavHeader from "@/app/header";

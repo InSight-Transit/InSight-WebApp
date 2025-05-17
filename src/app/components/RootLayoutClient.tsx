@@ -1,3 +1,10 @@
+/*
+  RootLayoutClient component
+  This component wraps the entire application with the necessary contexts.
+  Such as AuthProvider, BalanceProvider, and LanguageProvider.
+  This is sent to the layout.tsx file to be used in the app.
+*/
+
 "use client";
 
 import { useState, useEffect } from "react";
@@ -11,15 +18,13 @@ export default function RootLayoutClient({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const [language, setLanguage] = useState("en"); // Default language is English
+  const [language, setLanguage] = useState("en");
 
-  // Load the saved language from localStorage (if available)
   useEffect(() => {
     const savedLanguage = localStorage.getItem("language") || "en";
     setLanguage(savedLanguage);
   }, []);
 
-  // Save the selected language to localStorage whenever it changes
   useEffect(() => {
     localStorage.setItem("language", language);
   }, [language]);

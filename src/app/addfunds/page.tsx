@@ -1,3 +1,9 @@
+/*
+  addFunds page
+  This page allows users to add funds to their account.
+  Displays balance and provides several options for adding funds.
+*/
+
 "use client";
 
 import { useEffect, useState } from "react";
@@ -65,7 +71,7 @@ function Home() {
       console.log("API Response:", text);
       const data = JSON.parse(text);
       if (data.url) {
-        window.location.href = data.url; // Redirect to Stripe Checkout
+        window.location.href = data.url;
       } else {
         console.error("Error creating checkout session:", data);
       }

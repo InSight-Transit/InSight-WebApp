@@ -1,3 +1,8 @@
+/*
+  Home page
+  First page a user is shown, where they select their language before proceeding.
+*/
+
 "use client";
 import NavHeader from "./header";
 import { useRouter } from "next/navigation";
@@ -10,8 +15,8 @@ export default function Home() {
   const { changeLanguage } = useLanguage();
 
   const handleLanguageChange = (lang: string) => {
-    changeLanguage(lang); // Change the language
-    router.push("/home"); // Redirect to /home
+    changeLanguage(lang);
+    router.push("/home");
   };
 
   return (

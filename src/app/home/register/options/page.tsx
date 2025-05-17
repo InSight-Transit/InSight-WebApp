@@ -1,10 +1,15 @@
+/*
+  options page
+  This page presents options for registering a face or purchasing a card.
+*/
+
 "use client";
 import NavHeader from "@/app/header";
 import ButtonLinks from "@/app/components/ButtonLinks";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { auth } from "../../../../../firebaseConfig"; // Ensure you import Firebase
-import { signOut } from "firebase/auth"; // Ensure you import Firebase
+import { auth } from "../../../../../firebaseConfig";
+import { signOut } from "firebase/auth";
 import { useTranslation } from "react-i18next";
 
 export default function OptionsPage() {
@@ -13,8 +18,8 @@ export default function OptionsPage() {
 
   const handleLogout = async () => {
     try {
-      await signOut(auth); // Sign out the user
-      router.push("/home/login"); // Redirect to login page
+      await signOut(auth);
+      router.push("/home/login");
     } catch (error) {
       console.error("Error signing out:", error);
     }
@@ -43,7 +48,6 @@ export default function OptionsPage() {
 
         <ButtonLinks />
 
-        {/* TEMP Back to Login Button */}
         <button onClick = {handleLogout} className="mt-[6vw] w-6/12 border-none text-[4.0vw] w-1/2 h-[9vw] outline-none bg-white text-black font-semibold rounded-lg">
           Back to Login
         </button>

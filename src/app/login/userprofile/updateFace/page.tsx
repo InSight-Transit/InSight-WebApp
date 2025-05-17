@@ -1,19 +1,23 @@
+/*
+  updateface page
+  Deletes existing facial data in MongoDB and scans new facial data after confirmation.
+*/
+
 "use client";
 import { useEffect, useRef, useState } from "react";
 import NavHeader from "@/app/header";
 import ButtonLinks from "@/app/components/ButtonLinks";
-
-import { auth } from "../../../../../firebaseConfig"; // Ensure you import Firebase
+import { auth } from "../../../../../firebaseConfig";
 import authWrapper from "@/app/components/authWrapper";
 import { useTranslation } from "react-i18next";
-import { useRouter } from "next/navigation"; // Use next/navigation instead of next/router
+import { useRouter } from "next/navigation";
 
 function Welcome() {
   const { t } = useTranslation("common");
   const videoRef = useRef<HTMLVideoElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [showConfirmation, setShowConfirmation] = useState(true); // State to show confirmation dialog
-  const router = useRouter(); 
+  const [showConfirmation, setShowConfirmation] = useState(true);
+  const router = useRouter();
 
 
   async function deleteFaceData() {
@@ -41,8 +45,7 @@ function Welcome() {
       const json = await response.json();
       console.log(json);
 
-      // Proceed to scan and add a new face
-      setShowConfirmation(false); // Hide confirmation dialog
+      setShowConfirmation(false);
     } catch (error) {
       if (error instanceof Error) {
         console.error(error.message);
@@ -85,7 +88,6 @@ function Welcome() {
       const json = await response.json();
       console.log(json);
 
-      // Redirect to user profile page
       setTimeout(() => {
       router.push("/login/userprofile");
       }, 5000);
@@ -159,7 +161,7 @@ function Welcome() {
       if (base64Img && base64Img !== "") {
         verify(base64Img);
       }
-    }, 10000);
+    }, 5000);
 
     return () => clearInterval(interval);
   }, []);

@@ -1,3 +1,8 @@
+/*
+  terms page
+  Terms and conditions page after user registration.
+*/
+
 "use client";
 
 import NavHeader from "@/app/header";
@@ -17,7 +22,7 @@ export default function Registration() {
       <div className="flex flex-1 justify-center items-center">
         <h2 className="text-white text-[3vw] font-bold pb-[4vw]">{t("review")}</h2>
       </div>
-      
+
       <div className="flex flex-col items-center justify-center">
         <div className="pb-[4vw] flex flex-1 justify-center items-center gap-[3vw] w-10/12"> 
           <div className="bg-white w-10/12 p-6 rounded-lg shadow-lg overflow-y-auto max-h-[60vh]">

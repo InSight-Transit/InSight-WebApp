@@ -1,3 +1,10 @@
+/*
+  webhook/route.js
+  This route handles the Stripe webhook events.
+  Verifies webhook signature and processing the `checkout.session.completed` event.
+  It is required to update user's balance in Firestore based on the payment amount.
+*/
+
 import Stripe from "stripe";
 import admin from "firebase-admin";
 
@@ -5,7 +12,6 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
   apiVersion: "2022-11-15",
 });
 
-// Initialize Firebase Admin SDK with explicit credentials
 if (!admin.apps.length) {
   admin.initializeApp({
     credential: admin.credential.cert({
@@ -16,7 +22,7 @@ if (!admin.apps.length) {
   });
 }
 
-const db = admin.firestore(); // Access Firestore using the Admin SDK to write
+const db = admin.firestore();
 
 export async function POST(req) {
   try {
@@ -25,7 +31,6 @@ export async function POST(req) {
 
     let event;
 
-    // Verify the Stripe webhook signature
     try {
       event = stripe.webhooks.constructEvent(payload, sig, process.env.STRIPE_WEBHOOK_SECRET);
     } catch (err) {
@@ -35,13 +40,11 @@ export async function POST(req) {
 
     console.log(`✅ Received event: ${event.type}`);
 
-    // Handle the `checkout.session.completed` event
     if (event.type === "checkout.session.completed") {
       const session = event.data.object;
 
-      // Extract metadata and payment details
-      const amount = session.amount_total / 100; // Convert cents to dollars
-      const userId = session.metadata?.userId; // Retrieve userId from metadata
+      const amount = session.amount_total / 100;
+      const userId = session.metadata?.userId;
 
       console.log(`✅ Payment success! User ID: ${userId}, Amount: $${amount}`);
 
@@ -51,10 +54,9 @@ export async function POST(req) {
       }
 
       try {
-        // Update the user's balance in Firestore
         const userRef = db.collection("users").doc(userId);
         await userRef.update({
-          balance: admin.firestore.FieldValue.increment(amount), // Increment the balance
+          balance: admin.firestore.FieldValue.increment(amount),
         });
 
         console.log(`✅ User ${userId} balance updated by $${amount}`);

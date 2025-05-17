@@ -1,10 +1,14 @@
+/*
+  reload page
+  This page presents options for reloading with cash or card.
+*/
+
 "use client";
 import Link from "next/link";
 import NavHeader from "../../../header";
 import authWrapper from "@/app/components/authWrapper";
 import ButtonLinks from "@/app/components/ButtonLinks";
 
-// encapsulated by authWrapper
 function Home() {
 
   return (

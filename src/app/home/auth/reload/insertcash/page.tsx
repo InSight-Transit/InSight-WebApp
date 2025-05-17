@@ -1,9 +1,13 @@
+/*
+  insertcash page
+  Sample page for inserting cash or coins.
+*/
+
 "use client";
 import authWrapper from "@/app/components/authWrapper";
 import NavHeader from "@/app/header";
 import ButtonLinks from "@/app/components/ButtonLinks";
 
-// encapsulated by authWrapper
 function Welcome() {
   return (
     <div className="bg-sky-700 min-h-screen w-full">

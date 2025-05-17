@@ -1,3 +1,8 @@
+/*
+  viewTransaction page
+  Retrieves transaction history from Stripe and displays it to user.
+*/
+
 "use client";
 
 import { useTransactions } from "../../../components/useTransactions";

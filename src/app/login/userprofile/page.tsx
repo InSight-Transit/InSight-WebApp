@@ -1,3 +1,9 @@
+/*
+  userprofile page
+  User management page that dispalys user information.
+  Allows the user to add funds, view transaction history, update face, and deactivate the account.
+*/
+
 "use client";
 
 import NavHeader from "../../header";
@@ -22,17 +28,11 @@ function UserProfile() {
   const [lastName, setLastName] = useState("");
   const [showConfirm, setShowConfirm] = useState(false);
 
-  /*useEffect(() => {
-    if (!loading && !user && !showConfirm) {
-      router.push("/home/login");
-    }
-  }, [user, loading, showConfirm, router]);*/
-
   useEffect(() => {
     const fetchUserData = async () => {
       if (user) {
         const db = getFirestore(app);
-        const userDoc = doc(db, "users", user.uid); // Assuming "users" is your Firestore collection
+        const userDoc = doc(db, "users", user.uid);
         const docSnap = await getDoc(userDoc);
 
         if (docSnap.exists()) {
@@ -55,21 +55,17 @@ function UserProfile() {
         const db = getFirestore(app);
         const userRef = doc(db, "users", user.uid);
 
-        // 1. Delete Firestore user doc
         await deleteDoc(userRef);
         console.log("Firestore user deleted");
 
-        // 2. Delete user from Firebase Auth
         const auth = getAuth(app);
-        await user.delete(); // Deletes the user from Firebase Authentication
+        await user.delete();
         console.log("User deleted from Firebase Authentication");
 
-        // 3. Sign the user out
         await signOut(auth);
         console.log("User signed out");
 
-        // 4. Redirect AFTER sign out (not inside useEffect)
-        router.push("/"); // Go to home page
+        router.push("/");
       } catch (error) {
         console.error("Error during deactivation:", error);
       }
@@ -92,14 +88,12 @@ function UserProfile() {
 
       <div className="flex flex-col items-center justify-center">
 
-        {/* Profile Card */}
         <div className="bg-white text-black rounded-lg shadow p-6 w-full max-w-md space-y-4 text-center">
           <div className="text-2xl font-semibold">{firstName} {lastName}</div>
           <div className="text-md">{t("accountCard")}{user.uid}</div>
           <div className="text-md">{t("balance")}${balance.toFixed(2)}</div>
         </div>
 
-      {/* Action Buttons */}
       <div className="grid grid-cols-2 gap-4 mt-10 w-full max-w-md">
       <Link href="/addfunds" passHref>
        <button className="w-full bg-white text-black font-semibold py-4 rounded-md shadow">
@@ -116,7 +110,7 @@ function UserProfile() {
           {t("updateFace")}
         </button>
       </Link>
-        <button 
+        <button
           onClick={() => setShowConfirm(true)}
           className="bg-white text-black font-semibold py-4 rounded-md shadow"
           >
@@ -127,7 +121,6 @@ function UserProfile() {
 
       <ButtonLinks backHref="/home" />
 
-      {/* Deactivation Confirmation Modal */}     
       {showConfirm && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
           <div className="bg-white p-6 rounded-xl shadow-lg text-center max-w-md w-[80%]">
@@ -150,8 +143,8 @@ function UserProfile() {
           </div>
         </div>
       )}
-    </div> 
-  </div>  
+    </div>
+  </div>
   );
 }
 

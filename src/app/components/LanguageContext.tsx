@@ -1,3 +1,8 @@
+/*
+  LanguageContext component
+  Used to translate pages using i18next in English, Chinese, Spanish, Vietnamese, and Tagalog.
+*/
+
 "use client";
 
 import React, { createContext, useContext, useState, ReactNode, useEffect } from "react";
@@ -16,13 +21,13 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     const savedLanguage = localStorage.getItem("language") || "en";
     setLanguage(savedLanguage);
-    i18n.changeLanguage(savedLanguage); // Set the language in i18n
+    i18n.changeLanguage(savedLanguage);
   }, []);
 
   const changeLanguage = (lang: string) => {
     setLanguage(lang);
-    i18n.changeLanguage(lang); // Update the language in i18n
-    localStorage.setItem("language", lang); // Save the language to localStorage
+    i18n.changeLanguage(lang);
+    localStorage.setItem("language", lang);
   };
 
   return (
@@ -34,7 +39,7 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
 
 export function useLanguage() {
   const context = useContext(LanguageContext);
-  console.log("LanguageContext:", context); // Debugging log
+  console.log("LanguageContext:", context);
   if (!context) {
     throw new Error("useLanguage must be used within a LanguageProvider");
   }

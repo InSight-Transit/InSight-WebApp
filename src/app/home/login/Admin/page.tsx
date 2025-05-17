@@ -1,11 +1,13 @@
+/*
+  Admin (login) page
+  Login page that uses email and password for authentication.
+*/
+
 "use client";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { signIn } from "../../../../../auth";
 
-// TEMP Login page to see if authentication is working
-// need to link to MongoDB and scan face instead for actual login
-// Replace with homepage(?)
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");

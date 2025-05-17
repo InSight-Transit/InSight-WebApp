@@ -1,9 +1,14 @@
+/*
+  registerface page
+  This page is used for registering a face using the webcam.
+*/
+
 "use client";
 import { useEffect, useRef } from "react";
 import NavHeader from "@/app/header";
 import ButtonLinks from "@/app/components/ButtonLinks";
 
-import { auth } from "../../../../../firebaseConfig"; // Ensure you import Firebase
+import { auth } from "../../../../../firebaseConfig";
 import authWrapper from "@/app/components/authWrapper";
 import { useTranslation } from "react-i18next";
 import router from "next/router";
@@ -51,7 +56,6 @@ function Welcome() {
       const json = await response.json();
       console.log(json);
 
-      // Redirect to login page
       setTimeout(() => {
       router.push("/home/login");
       }, 5000);
@@ -74,7 +78,6 @@ useEffect(() => {
         video.srcObject = stream;
 
         video.onloadedmetadata = () => {
-          // Check if video is already playing before calling play()
           const isPlaying =
             video.currentTime > 0 &&
             !video.paused &&
@@ -86,11 +89,10 @@ useEffect(() => {
             if (playPromise !== undefined) {
               playPromise
                 .then(() => {
-                  console.log("✅ Video playback started successfully.");
+                  console.log("Video playback started successfully.");
                 })
                 .catch((error) => {
-                  console.warn("⚠️ Video playback prevented:", error);
-                  // Optionally update UI to show paused state
+                  console.warn("Video playback prevented:", error);
                 });
             }
           }
@@ -129,9 +131,6 @@ useEffect(() => {
 
   return () => clearInterval(interval);
 }, []);
-
-
-
 
   return (
     <div className="bg-sky-700 min-h-screen w-full">
